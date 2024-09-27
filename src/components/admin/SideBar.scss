@@ -1,0 +1,57 @@
+.admin-sidebar {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  min-height: 400px;
+}
+
+.sideBar-content {
+  transition: width 0.3s;
+  background-color: inherit; /* Ensure the background color is inherited */
+  &.collapsed {
+    width: 80px; /* Adjust the width when collapsed */
+  }
+
+  .pro-sidebar-inner {
+    background-color: inherit;
+  }
+
+  .pro-menu-item {
+    color: inherit;
+
+    &:hover {
+      background-color: #3a4b61;
+    }
+
+    .nav-link {
+      color: inherit;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.button-content {
+  position: absolute;
+  top: 10px; /* Adjust top position as needed */
+  left: 100%;
+  transform: translateX(-50%); /* Adjust position based on sidebar width */
+  transition: left 0.3s; /* Match the sidebar transition */
+  z-index: 10; /* Ensure the button appears above the sidebar */
+
+  .sb-button {
+    border: none;
+    color: #ffffff;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}

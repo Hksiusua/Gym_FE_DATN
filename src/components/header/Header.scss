@@ -1,0 +1,17 @@
+.fontText {
+  font-weight: normal;
+
+  &.active {
+    font-weight: bold;
+    color: aqua;
+    border-radius: 5px;
+  }
+
+  &.transitioning {
+    view-transition-name: slide;
+  }
+}
+
+.navbar-nav .dropdown-menu {
+  left: -80px !important;
+}
