@@ -7,9 +7,9 @@
 
 .sideBar-content {
   transition: width 0.3s;
-  background-color: inherit; /* Ensure the background color is inherited */
+  background-color: inherit; 
   &.collapsed {
-    width: 80px; /* Adjust the width when collapsed */
+    width: 500px; 
   }
 
   .pro-sidebar-inner {
@@ -20,13 +20,12 @@
     color: inherit;
 
     &:hover {
-      background-color: #3a4b61;
+      background-color: red;
     }
 
     .nav-link {
       color: inherit;
       text-decoration: none;
-
       &:hover {
         text-decoration: underline;
       }
@@ -36,11 +35,11 @@
 
 .button-content {
   position: absolute;
-  top: 10px; /* Adjust top position as needed */
+  top: 10px; 
   left: 100%;
-  transform: translateX(-50%); /* Adjust position based on sidebar width */
-  transition: left 0.3s; /* Match the sidebar transition */
-  z-index: 10; /* Ensure the button appears above the sidebar */
+  transform: translateX(-50%); 
+  transition: left 0.3s; 
+  z-index: 10; 
 
   .sb-button {
     border: none;
@@ -54,4 +53,21 @@
       background-color: #0056b3;
     }
   }
+}
+
+.ps-menu-button.collapsed {
+  margin-left: 10%; 
+  margin-top: 2%;  
+}
+
+.copy-icon {
+  font-size: 20px;
+}
+.ps-menu-button.active {
+  background-color: #2D363E; 
+  color: white; 
+}
+
+.ps-menu-button:hover {
+  color: #2D363E;
 }
