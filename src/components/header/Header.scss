@@ -1,17 +1,63 @@
-.fontText {
-  font-weight: normal;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 0 20px;
+  height: 64px;
 
-  &.active {
+  .logo {
+    font-size: 24px;
     font-weight: bold;
-    color: aqua;
-    border-radius: 5px;
   }
 
-  &.transitioning {
-    view-transition-name: slide;
+  .auth-section {
+    display: flex;
+    align-items: center;
+    white-space: nowrap; 
+    flex-shrink: 0; 
+  }
+
+  .nav-link {
+    color: #000;
+    &:hover {
+      color: #1890ff;
+    }
+  }
+
+  .ant-menu-horizontal {
+    border-bottom: none;
   }
 }
 
-.navbar-nav .dropdown-menu {
-  left: -80px !important;
+.menu-container {
+  flex-grow: 1; 
+  margin-left: 25px; 
+  margin-right: 25px; 
+  overflow-x: auto; 
+  white-space: nowrap; 
+}
+.scroll-item {
+  overflow-x: auto;  
+  overflow-y: hidden; 
+  white-space: nowrap; 
+  display: flex;
+  justify-content: center; 
+}
+
+.ant-menu-horizontal {
+  display: inline-flex; 
+  flex-wrap: nowrap;
+}
+
+@media screen and (max-width: 768px) {
+  .auth-section {
+    justify-content: flex-end;
+    flex-shrink: 1; 
+  }
+
+  .menu-container {
+    margin-left: 10px; 
+    margin-right: 10px;
+  }
 }

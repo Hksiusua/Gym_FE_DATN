@@ -1,57 +1,89 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { Layout, Menu, Dropdown, Button } from "antd";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import "./Header.scss";
+import { DownOutlined } from "@ant-design/icons";
+import './Header.scss';
+
+const { Header } = Layout;
 
 function BasicExample() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
-  console.log("checkkkk", account);
+
+  const menu = (
+    <Menu>
+      <Menu.Item key="1">
+        <NavLink to="/logout">Logout</NavLink>
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key="2">
+        <NavLink to="/language">Language</NavLink>
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
-      <Container>
-        <NavLink to="/" className="nav-brand nav-link">
-          NghiaDzai
-        </NavLink>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <NavLink to="/" className="nav-link fontText">
-              Home
-            </NavLink>
-            <NavLink to="/admins" className="nav-link">
-              Admin
-            </NavLink>
-            <NavLink to="/users" className="nav-link">
-              User
-            </NavLink>
-          </Nav>
-          <Nav>
-            {!isAuthenticated ? (
-              <>
-                <NavLink to="/logins" className="nav-link fontText">
+    <Layout >
+      <Header className="header">
+        <div className="logo">
+          <NavLink to="/home" className="nav-brand">
+            Crafters
+          </NavLink>
+        </div>
+        <div className="scroll-item">
+            <div className="menu-container">
+              <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
+                <Menu.Item key="1">
+                  <NavLink to="/home" className="nav-link">
+                    Home
+                  </NavLink>
+                </Menu.Item>
+                <Menu.Item key="2">
+                  <NavLink to="/admins" className="nav-link">
+                    Admin
+                  </NavLink>
+                </Menu.Item>
+                <Menu.Item key="3">
+                  <NavLink to="/users" className="nav-link">
+                    User
+                  </NavLink>
+                </Menu.Item>
+                <Menu.Item key="4">
+                  <NavLink to="/users" className="nav-link">
+                    User
+                  </NavLink>
+                </Menu.Item>
+             </Menu>
+            </div>
+        </div>
+
+          <div className="auth-section">
+          {!isAuthenticated ? (
+            <>
+              <Button type="primary" style={{ marginRight: '5%' }}>
+                <NavLink to="/logins" className="nav-link">
                   Login
                 </NavLink>
+              </Button>
+              <Button type="primary">
                 <NavLink to="/registers" className="nav-link">
                   Sign up
                 </NavLink>
-              </>
-            ) : (
-              <NavDropdown title={account.username}>
-                <div></div>
-                <NavDropdown.Item href="#action/3.2">Logout</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.3">Language</NavDropdown.Item>
-              </NavDropdown>
-            )}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+              </Button>
+            </>
+          ) : (
+            <Dropdown overlay={menu}>
+              <Button>
+                {account.username} <DownOutlined />
+              </Button>
+            </Dropdown>
+          )}
+          </div>
+        
+        
+      </Header>
+    </Layout>
   );
 }
 

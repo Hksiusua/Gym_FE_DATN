@@ -11,10 +11,6 @@ const App = () => {
       <div className="header-container">
         <Header/>
       </div>
-
-      {/* <div className="main-container">
-        <Admin />
-      </div> */}
       <div className="app-content">
         <Outlet />
       </div>
