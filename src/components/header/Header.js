@@ -33,7 +33,7 @@ function BasicExample() {
         </div>
         <div className="scroll-item">
             <div className="menu-container">
-              <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
+              <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
                 <Menu.Item key="1">
                   <NavLink to="/home" className="nav-link">
                     Home
@@ -61,12 +61,12 @@ function BasicExample() {
           <div className="auth-section">
           {!isAuthenticated ? (
             <>
-              <Button type="primary" style={{ marginRight: '5%' }}>
+              <Button  style={{ marginRight: '5%' }}>
                 <NavLink to="/logins" className="nav-link">
                   Login
                 </NavLink>
               </Button>
-              <Button type="primary">
+              <Button>
                 <NavLink to="/registers" className="nav-link">
                   Sign up
                 </NavLink>

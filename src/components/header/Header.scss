@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
+  background-color: #001529;
   padding: 0 20px;
   height: 64px;
 
@@ -16,12 +16,12 @@
     align-items: center;
     white-space: nowrap; 
     flex-shrink: 0; 
-  }
+  } 
 
   .nav-link {
     color: #000;
     &:hover {
-      color: #1890ff;
+      color: #ff8f18;
     }
   }
 
@@ -59,5 +59,28 @@
   .menu-container {
     margin-left: 10px; 
     margin-right: 10px;
+  }
+}
+.nav-brand{
+  color: white;
+
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out; 
+  &:hover {
+    color: #F36100;
+  }
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: #F36100; 
   }
 }

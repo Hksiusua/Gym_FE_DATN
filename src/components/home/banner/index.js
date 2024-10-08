@@ -5,6 +5,7 @@ import './index.scss';
 
 const CustomCarousel = (props) => {
   return (
+    <div className="custom-banner">
     <AntdCarousel autoplay>
       <div>
         <img
@@ -21,6 +22,7 @@ const CustomCarousel = (props) => {
         />
       </div>
        </AntdCarousel>
+       </div>
   );
 };
 
