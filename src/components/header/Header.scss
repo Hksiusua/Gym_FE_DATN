@@ -18,12 +18,7 @@
     flex-shrink: 0; 
   } 
 
-  .nav-link {
-    color: #000;
-    &:hover {
-      color: #ff8f18;
-    }
-  }
+  
 
   .ant-menu-horizontal {
     border-bottom: none;
@@ -65,22 +60,17 @@
   color: white;
 
 }
-
 .nav-link {
   color: white;
   text-decoration: none;
   transition: color 0.3s ease-in-out; 
-  &:hover {
-    color: #F36100;
-  }
+
 }
 
-.nav-link {
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s ease-in-out;
-
-  &:hover {
-    color: #F36100; 
-  }
+.menu-container .ant-menu-item-selected {
+  background-color: orange !important; 
+  color: white !important; 
+}
+.menu-container .ant-menu-item:hover {
+  color: orange !important;
 }

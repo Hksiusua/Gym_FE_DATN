@@ -7,7 +7,7 @@ import class5 from '../../assets/class-5.jpg';
 import { Card } from 'antd';
 import { RightSquareOutlined } from '@ant-design/icons'; 
 const { Meta } = Card;
-const Advantage = (props) => {
+const Advantage = ({onIconClick }) => {
     return(
         <div className='advantage'>
           <div className='custome-advantage'>
@@ -27,7 +27,8 @@ const Advantage = (props) => {
                      <span className='box-text'>Thon gọn</span>
                      </div>
                       <div className='design-text'>
-                      <RightSquareOutlined style={{ fontSize: '150%', color: 'white' }} />
+                      <RightSquareOutlined style={{ fontSize: '2vw', color: 'white' }} onClick={onIconClick} />
+
                       </div> 
                   </div>
                   </Card>
@@ -43,7 +44,7 @@ const Advantage = (props) => {
                      <span className='box-text'>Bền bỉ</span>
                      </div>
                       <div className='design-text'>
-                      <RightSquareOutlined style={{ fontSize: '150%', color: 'white' }} />
+                      <RightSquareOutlined style={{ fontSize: '2vw', color: 'white' }} onClick={onIconClick} />
                       </div> 
                   </div>
                   </Card>
@@ -59,16 +60,13 @@ const Advantage = (props) => {
                      <span className='box-text'>Sức mạnh</span>
                      </div>
                       <div className='design-text'>
-                      <RightSquareOutlined style={{ fontSize: '150%', color: 'white' }} />
+                      <RightSquareOutlined style={{ fontSize: '2vw', color: 'white' }} onClick={onIconClick} />
                       </div> 
                   </div>
                   </Card>
               </div>
             </div>    
            </div>
-
-
-           {/*  */}
 
            <div className='custome-two'>
             <div className='custome-grid3'>
@@ -83,7 +81,7 @@ const Advantage = (props) => {
                      <span className='box-text'>Thon gọn</span>
                      </div>
                       <div className='design-text2'>
-                      <RightSquareOutlined style={{ fontSize: '150%', color: 'white' }} />
+                      <RightSquareOutlined style={{ fontSize: '2vw', color: 'white' }} onClick={onIconClick} />
                       </div> 
                   </div>
                   </Card>
@@ -99,7 +97,7 @@ const Advantage = (props) => {
                      <span className='box-text'>Sức mạnh</span>
                      </div>
                       <div className='design-text2'>
-                      <RightSquareOutlined style={{ fontSize: '150%', color: 'white' }} />
+                      <RightSquareOutlined style={{ fontSize: '2vw', color: 'white' }} onClick={onIconClick} />
                       </div> 
                   </div>
                   </Card>

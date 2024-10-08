@@ -6,7 +6,6 @@
     margin: 0 auto;
     padding: 20px;
     background-color: #200E00;
-
 }
 
 .write-why{
@@ -14,7 +13,8 @@
     color: #F36100;
     justify-content: center; 
     font-weight: bolder;
-    font-size: 24px;
+    font-size: 2.5vw;
+    margin-bottom: 2%;
 }
 .icon-margin{
     gap:5px;
@@ -26,7 +26,6 @@
     display: flex;
     flex-direction: column; 
 }
-
 .style-card{
     position: relative;
 }
@@ -52,12 +51,10 @@
     justify-content: center; 
     gap: 30px;
 }
-
 .custome-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 5px; 
-    
     @media (max-width: 767px) {
       grid-template-columns: repeat(2, 1fr); 
       grid-template-rows: auto; 
@@ -84,7 +81,6 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
     gap: 5px; 
-    
     @media (max-width: 767px) {
       grid-template-columns: repeat(2, 1fr); 
       grid-template-rows: auto; 
