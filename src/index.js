@@ -23,7 +23,7 @@ import Discounts from "./components/admin/content/discount";
 import Managers from "./components/admin/content/managers";
 import Employees from "./components/admin/content/managers/employees";
 import Customers from "./components/admin/content/managers/customers";
-
+import ServicePage from "./components/service-page";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
@@ -33,7 +33,8 @@ root.render(
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/" element={<App />}>
             <Route path="/home" element={<HomePage />} />
-            <Route path="users" element={<ListQuiz />} />
+            <Route path="/users" element={<ListQuiz />} />
+            <Route path="/services-page" element={< ServicePage/>} />
           </Route>
 
           <Route path="/quiz/:id" element={<DetailQuiz />} />

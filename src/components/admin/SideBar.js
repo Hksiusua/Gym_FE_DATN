@@ -12,10 +12,8 @@ const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
 
-  // Kiểm tra xem đường dẫn hiện tại có khớp với đường dẫn cần active không
   const isActive = (path) => location.pathname === path;
 
-  // Kiểm tra nếu người dùng đang ở trong "/admins/managers", bao gồm cả employees và customers
   const isManagerActive = location.pathname.startsWith("/admins/managers");
 
   return (

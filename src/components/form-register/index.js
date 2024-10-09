@@ -14,7 +14,7 @@ const FormRegister = ({ registerFlag }) => {
   };
 
   return (
-    <div className='form-main' id="register-form"> {/* Thêm ID để cuộn */}
+    <div className='form-main' id="register-form">
       <div className='text-register'>
         Form đăng kí
       </div>

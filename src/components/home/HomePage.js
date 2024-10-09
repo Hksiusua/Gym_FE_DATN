@@ -4,9 +4,9 @@ import CustomCarousel from "./banner";
 import Choose from "./choose";
 import Advantage from "./advantage";
 import BannerRegister from "./banner-register";
-import FormRegister from "./form-register";
 import Footer from "../footer";
 import { useRef } from "react";
+import FormRegister from "../form-register";
 
 const HomePage = (props) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);

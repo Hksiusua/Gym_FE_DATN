@@ -45,13 +45,13 @@ function BasicExample() {
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item key="3">
-                  <NavLink to="/users" className="nav-link">
-                    User
+                  <NavLink to="/services-page" className="nav-link">
+                    Service
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item key="4">
                   <NavLink to="/users" className="nav-link">
-                    User
+                    Introduce
                   </NavLink>
                 </Menu.Item>
              </Menu>
