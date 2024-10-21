@@ -25,64 +25,62 @@ function BasicExample() {
 
   return (
     <Layout >
-      <Header className="header">
-        <div className="logo">
-          <NavLink to="/home" className="nav-brand">
-            Crafters
-          </NavLink>
-        </div>
-        <div className="scroll-item">
-            <div className="menu-container">
-              <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-                <Menu.Item key="1">
-                  <NavLink to="/home" className="nav-link">
-                    Home
-                  </NavLink>
-                </Menu.Item>
-                <Menu.Item key="2">
-                  <NavLink to="/admins" className="nav-link">
-                    Admin
-                  </NavLink>
-                </Menu.Item>
-                <Menu.Item key="3">
-                  <NavLink to="/services-page" className="nav-link">
-                    Service
-                  </NavLink>
-                </Menu.Item>
-                <Menu.Item key="4">
-                  <NavLink to="/users" className="nav-link">
-                    Introduce
-                  </NavLink>
-                </Menu.Item>
-             </Menu>
-            </div>
-        </div>
+      <Header className="header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+  <div className="logo">
+    <NavLink to="/home" className="nav-brand">
+      Crafters
+    </NavLink>
+  </div>
 
-          <div className="auth-section">
-          {!isAuthenticated ? (
-            <>
-              <Button  style={{ marginRight: '5%' }}>
-                <NavLink to="/logins" className="nav-link">
-                  Login
-                </NavLink>
-              </Button>
-              <Button>
-                <NavLink to="/registers" className="nav-link">
-                  Sign up
-                </NavLink>
-              </Button>
-            </>
-          ) : (
-            <Dropdown overlay={menu}>
-              <Button>
-                {account.username} <DownOutlined />
-              </Button>
-            </Dropdown>
-          )}
-          </div>
-        
-        
-      </Header>
+  <div className="menu-container" style={{ flex: 1 }}>
+    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']} >
+      <Menu.Item key="1">
+        <NavLink to="/home" className="nav-link">
+          Home
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key="2">
+        <NavLink to="/admins" className="nav-link">
+          Admin
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key="3">
+        <NavLink to="/services-page" className="nav-link">
+          Service
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key="4">
+        <NavLink to="/users" className="nav-link">
+          Introduce
+        </NavLink>
+      </Menu.Item>
+    </Menu>
+  </div>
+
+  <div className="auth-section">
+    {!isAuthenticated ? (
+      <>
+        <Button style={{ marginRight: '5%' }}>
+          <NavLink to="/logins" className="nav-link">
+            Login
+          </NavLink>
+        </Button>
+        <Button>
+          <NavLink to="/registers" className="nav-link">
+            Sign up
+          </NavLink>
+        </Button>
+      </>
+    ) : (
+      <Dropdown overlay={menu}>
+        <Button>
+          {account.username} <DownOutlined />
+        </Button>
+      </Dropdown>
+    )}
+  </div>
+</Header>
+
     </Layout>
   );
 }
