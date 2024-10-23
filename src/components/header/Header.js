@@ -52,11 +52,13 @@ function BasicExample() {
                 Trang chủ
               </NavLink>
             </Menu.Item>
-            <Menu.Item key="2">
-              <NavLink to="/admins" className="nav-link">
-                Admin
-              </NavLink>
-            </Menu.Item>
+            {isAuthenticated && (
+              <Menu.Item key="2">
+                <NavLink to="/admins" className="nav-link">
+                  Admin
+                </NavLink>
+              </Menu.Item>
+             )} 
             <Menu.Item key="3">
               <NavLink to="/services-page" className="nav-link">
                 Dịch vụ

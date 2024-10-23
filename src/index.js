@@ -20,31 +20,35 @@ import Discounts from "./components/admin/content/discount";
 import Managers from "./components/admin/content/managers";
 import Employees from "./components/admin/content/managers/employees";
 import Customers from "./components/admin/content/managers/customers";
+import HistoriesTranning from "./components/histories-tranning"
+import Invoice from "./components/admin/content/invoice";
+import ProtectedRoute from "./components/protected-router";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/" element={<App />}>
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/users" element={<User />} />
-          <Route path="/services-page" element={<ServicePage />} />
-        </Route>
-        <Route path="/admins" element={<Admin/>}>
-             {/* <Route index element={<DashBoard />} /> */}
-             <Route index element={<Courses/>} />
-             <Route path="courses" element={<Courses />} />
-             <Route path="news" element={<News />} />
-             <Route path="discounts" element={<Discounts />} />
-             <Route path="managers" element={<Managers />}>
-               <Route path="employees" element={<Employees />} />
-               <Route path="customers" element={<Customers />} />
-             </Route>
-           </Route>
-        <Route path="/logins" element={<Login />} />
-        <Route path="/registers" element={<Register />} />
-      </Routes>
+  <Route path="/" element={<Navigate to="/home" />} />
+  <Route path="/" element={<App />}>
+    <Route path="/home" element={<HomePage />} />
+    <Route path="/users" element={<User />} />
+    <Route path="/services-page" element={<ServicePage />} />
+  </Route>
+  <Route path="/admins" element={ <ProtectedRoute><Admin /></ProtectedRoute>}>
+    <Route index element={<Courses />} />
+    <Route path="courses" element={<Courses />} />
+    <Route path="news" element={<News />} />
+    <Route path="discounts" element={<Discounts />} />
+    <Route path="histories-traning" element={<HistoriesTranning />} />
+    <Route path="invoice" element={<Invoice />} />
+    <Route path="managers" element={<Managers />}>
+      <Route path="employees" element={<Employees />} />
+      <Route path="customers" element={<Customers />} />
+    </Route>
+  </Route>
+  <Route path="/logins" element={<Login />} />
+  <Route path="/registers" element={<Register />} />
+</Routes>
       <ToastContainer
         position="top-right"
         autoClose={5000}

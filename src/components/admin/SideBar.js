@@ -51,6 +51,16 @@ const SideBar = () => {
               <SolutionOutlined className="copy-icon" />  {!collapsed && "Quản lí"}
             </Link>
           </MenuItem>
+          <MenuItem className={`ps-menu-button ${isActive("/admins/histories-traning") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
+            <Link to="/admins/histories-traning" className="nav-link">
+              <SolutionOutlined className="copy-icon" />  {!collapsed && "Lịch sử tập luyện"}
+            </Link>
+          </MenuItem>
+          <MenuItem className={`ps-menu-button ${isActive("/admins/invoice") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
+            <Link to="/admins/invoice" className="nav-link">
+              <SolutionOutlined className="copy-icon" />  {!collapsed && "Hóa đơn"}
+            </Link>
+          </MenuItem>
         </Menu>
       </Sidebar>
       <main className="button-content">
