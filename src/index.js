@@ -31,8 +31,9 @@ root.render(
           <Route path="/users" element={<User />} />
           <Route path="/services-page" element={<ServicePage />} />
         </Route>
-        <Route path="/admins" element={<Admin />}>
-             <Route index element={<DashBoard />} />
+        <Route path="/admins" element={<Admin/>}>
+             {/* <Route index element={<DashBoard />} /> */}
+             <Route index element={<Courses/>} />
              <Route path="courses" element={<Courses />} />
              <Route path="news" element={<News />} />
              <Route path="discounts" element={<Discounts />} />
