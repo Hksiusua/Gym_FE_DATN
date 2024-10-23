@@ -1,5 +1,7 @@
-// import axios from "axios";
 import { instance } from "../utils/axiosCustomize";
+const postLoginUser = (tenNguoiDung, matKhauNguoiDung) => {
+  return instance.post(`user/login`, { tenNguoiDung, matKhauNguoiDung });
+};
 
 const createUser = (email, password, username, role, image) => {
   const data = new FormData();
@@ -8,11 +10,11 @@ const createUser = (email, password, username, role, image) => {
   data.append("username", username);
   data.append("role", role);
   data.append("image", image);
-  return instance.post("api/v1/participant", data); // this is data is take data so add
+  return instance.post("api/v1/participant", data); 
 };
 
 const showAllUser = () => {
-  return instance.get("api/v1/participant/all"); // this is data is take data so add
+  return instance.get("api/v1/participant/all");
 };
 
 const putUpdateUser = (id, username, role, image) => {
@@ -21,20 +23,17 @@ const putUpdateUser = (id, username, role, image) => {
   data.append("username", username);
   data.append("role", role);
   data.append("image", image);
-  return instance.put("api/v1/participant", data); // this is data is take data so add
+  return instance.put("api/v1/participant", data);
 };
 
 const deleteUser = (userId) => {
-  return instance.delete("api/v1/participant", { data: { id: userId } }); // this is data is take data so add
+  return instance.delete("api/v1/participant", { data: { id: userId } }); 
 };
 
 const getUserWithPaginate = (page, limit) => {
-  return instance.get(`api/v1/participant?page=${page}&limit=${limit}`); // this is data is take data so add
+  return instance.get(`api/v1/participant?page=${page}&limit=${limit}`); 
 };
 
-const postLoginUser = (email, password) => {
-  return instance.post(`api/v1/login`, { email, password });
-};
 
 const postRegisterUser = (email, username, password) => {
   return instance.post(`api/v1/register`, { email, username, password });

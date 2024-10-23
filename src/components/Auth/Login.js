@@ -3,75 +3,110 @@ import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import { postLoginUser } from "../service/apiService";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux"; // the dispath the same navigate
-import { doLogin } from "../../redux/action/userAction";
-const Login = (props) => {
+import { useDispatch } from "react-redux"; 
+import { doLogin } from "../../store/userSlice";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'; 
+import { CheckOutlined } from '@ant-design/icons'; 
+import { Button } from 'antd';
+
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleLogin = async (e) => {
     e.preventDefault(); 
+    let res = await postLoginUser(email, password);
+    if (res && res?.data?.accessToken) {
+      const defaultUser = {
+        username: "Guest",
+        email: email 
+      };
 
-    const emailValue = email;
-    const passwordValue = password;
+      dispatch(doLogin({
+        user: {
+          username: res?.data?.tenNguoiDung || defaultUser.username,
+        },
+        accessToken: res?.data?.accessToken
+      }));
 
-    let res = await postLoginUser(emailValue, passwordValue);
-    if (res.data && res.data.EC === 0) {
-      dispatch(doLogin(res.data));
-      toast.success(res.data.EM);
-      navigate("/");
-    }
-
-    if (res.data && res.data.EC !== 0) {
-      toast.error(res.data.EM);
+      navigate('/home');
+      toast.success("Đăng nhập thành công");
+    } else {
+      toast.error("Đăng nhập thất bại");    
     }
   };
 
   return (
-    <div className="container">
-      <div className="showQuestion">Don't have an account yet</div>
-      <div className="showName">Cong Nghia IT</div>
-      <div className="showName">Hello who's this ?</div>
+    <section className="vh-100">
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-sm-6 text-black">
+            <div className="px-5 ms-xl-4 mt-5">
+              <span className="h1 fw-bold mb-0 crafters-title">Crafters</span>
+            </div>
+            <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+              <form style={{ width: "23rem" }} onSubmit={handleLogin}>
+                <h3 className="fw-normal mb-3 pb-3 fw-bold" style={{ letterSpacing: "1px" }}>Sức khỏe là tất cả</h3>
 
-      <form className="formLogin" onSubmit={handleLogin}>
-        <label className="mt-2" htmlFor="email">
-          Email
-        </label>
-        <input
-          type="email"
-          id="email"
-          className="desingInput"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          required
-        />
-        <label className="mt-2" htmlFor="password">
-          Password
-        </label>
-        <input
-          type="password"
-          id="password"
-          className="desingInput"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          required
-        />
-        <span className="forgot">Forgot password?</span>
-        <button type="submit" className="btn btn-secondary mt-2">
-          Login to Nghia
-        </button>
-        <div>
-          <span
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Go to Page
-          </span>
+                <div className="form-outline mb-4">
+                <label className="form-label" htmlFor="form2Example18">Username</label>
+                  <input 
+                    type="text" 
+                    id="form2Example18" 
+                    className="form-control form-control-lg" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)} 
+                    required
+                  />
+                </div>
+
+                <div className="form-outline mb-4 position-relative">
+                <label className="form-label" htmlFor="form2Example28">Password</label>
+                  <input 
+                    type={showPassword ? "text" : "password"} 
+                    id="form2Example28" 
+                    className="form-control form-control-lg" 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)} 
+                    required
+                  />
+                  <span 
+                    className="position-absolute" 
+                    style={{ right: "5%", top: "70%", transform: "translateY(-50%)", cursor: "pointer" }} 
+                    onClick={() => setShowPassword(!showPassword)} 
+                  >
+                    <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+                  </span>
+                </div>
+
+                <div className="pt-1 mb-4">
+                  <Button 
+                  type="primary" 
+                  size="large" 
+                  block 
+                  htmlType="submit" 
+                  icon={<CheckOutlined />} 
+                  >
+                    Đăng nhập
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div className="col-sm-6 px-0 d-none d-sm-block">
+            <img 
+              src="https://i.pinimg.com/originals/5d/05/17/5d05170e29ff9b8b9dd6d284e3a8809d.png"
+              alt="Login image" 
+              className="w-100 vh-100" 
+              style={{ objectFit: "cover", objectPosition: "left" }} 
+            />
+          </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </section>
   );
 };
 

@@ -1,21 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link, useLocation } from "react-router-dom"; 
-import "./SideBar.scss";
-import "./Admin.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleChevronLeft, faCircleChevronRight } from "@fortawesome/free-solid-svg-icons"; 
-import { CopyOutlined, FormOutlined, FileSearchOutlined, FileOutlined, SolutionOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { FormOutlined, FileSearchOutlined, FileOutlined, SolutionOutlined } from "@ant-design/icons";
+import "./SideBar.scss";
+import "./Admin.scss";
 
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setCollapsed(true); 
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const isActive = (path) => location.pathname === path;
-
   const isManagerActive = location.pathname.startsWith("/admins/managers");
-
   return (
     <div
       className="admin-sidebar"
@@ -23,11 +31,6 @@ const SideBar = () => {
     >
       <Sidebar collapsed={collapsed} className={`sideBar-content ${collapsed ? 'collapsed' : ''}`}>
         <Menu>
-          <MenuItem className={`ps-menu-button ${isActive("/admins") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
-            <Link to="/admins" className="nav-link">
-              DashBoard
-            </Link>
-          </MenuItem>
           <MenuItem className={`ps-menu-button ${isActive("/admins/courses") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
             <Link to="/admins/courses" className="nav-link">
               <FormOutlined className="copy-icon" />  {!collapsed && "Khóa học"}

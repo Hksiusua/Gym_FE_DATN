@@ -9,11 +9,7 @@ import { useRef } from "react";
 import FormRegister from "../form-register";
 
 const HomePage = (props) => {
-  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  const account = useSelector((state) => state.user.account);
-
   const formRef = useRef(null);
-
   const handleScrollToForm = () => {
     formRef.current.scrollIntoView({ behavior: 'smooth' });
   };
