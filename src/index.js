@@ -14,7 +14,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ServicePage from "./components/service-page";
 import DashBoard from "./components/admin/content/DashBoard"
-import Courses from "./components/admin/content/courses";
+import PackageCourses from "./components/admin/content/packageCourses";
+import ClassCourses from "./components/admin/content/classCourses";
 import News from "./components/admin/content/news";
 import Discounts from "./components/admin/content/discount";
 import Managers from "./components/admin/content/managers";
@@ -35,8 +36,9 @@ root.render(
     <Route path="/services-page" element={<ServicePage />} />
   </Route>
   <Route path="/admins" element={ <ProtectedRoute><Admin /></ProtectedRoute>}>
-    <Route index element={<Courses />} />
-    <Route path="courses" element={<Courses />} />
+    <Route index element={<ClassCourses />} />
+    <Route path="class-courses" element={<ClassCourses />} />
+    <Route path="package-courses" element={<PackageCourses />} />
     <Route path="news" element={<News />} />
     <Route path="discounts" element={<Discounts />} />
     <Route path="histories-traning" element={<HistoriesTranning />} />

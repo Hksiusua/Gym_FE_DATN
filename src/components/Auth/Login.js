@@ -19,6 +19,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault(); 
     let res = await postLoginUser(email, password);
+    console.log(res);
     if (res && res?.data?.accessToken) {
       const defaultUser = {
         username: "Guest",
@@ -31,7 +32,10 @@ const Login = () => {
         },
         accessToken: res?.data?.accessToken
       }));
-
+      localStorage.setItem('accessToken', res?.data?.accessToken);
+      localStorage.setItem('user', JSON.stringify({
+      username: res?.data?.tenNguoiDung || defaultUser.username,
+    }));
       navigate('/home');
       toast.success("Đăng nhập thành công");
     } else {

@@ -31,9 +31,9 @@ const SideBar = () => {
     >
       <Sidebar collapsed={collapsed} className={`sideBar-content ${collapsed ? 'collapsed' : ''}`}>
         <Menu>
-          <MenuItem className={`ps-menu-button ${isActive("/admins/courses") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
-            <Link to="/admins/courses" className="nav-link">
-              <FormOutlined className="copy-icon" />  {!collapsed && "Khóa học"}
+          <MenuItem className={`ps-menu-button ${isActive("/admins/class-courses") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
+            <Link to="/admins/class-courses" className="nav-link">
+              <FormOutlined className="copy-icon" />  {!collapsed && "Lớp học"}
             </Link>
           </MenuItem>
           <MenuItem className={`ps-menu-button ${isActive("/admins/news") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
@@ -59,6 +59,11 @@ const SideBar = () => {
           <MenuItem className={`ps-menu-button ${isActive("/admins/invoice") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
             <Link to="/admins/invoice" className="nav-link">
               <SolutionOutlined className="copy-icon" />  {!collapsed && "Hóa đơn"}
+            </Link>
+          </MenuItem>
+          <MenuItem className={`ps-menu-button ${isActive("/admins/package-courses") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
+            <Link to="/admins/package-courses" className="nav-link">
+              <SolutionOutlined className="copy-icon" />  {!collapsed && "Gói tập"}
             </Link>
           </MenuItem>
         </Menu>

@@ -6,7 +6,7 @@ import ModalCourses from '../modalCousres';
 
 const { RangePicker } = DatePicker;
 
-const Courses = (props) => {
+const ClassCourses = (props) => {
   const [inputValue, setInputValue] = useState('');
   const [selectedDates, setSelectedDates] = useState([]);
 
@@ -51,6 +51,6 @@ const Courses = (props) => {
       
     );
   };
-  export default Courses;
+  export default ClassCourses;
 
 
