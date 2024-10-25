@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Input, message, DatePicker, Form, InputNumber, Switch } from 'antd';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 const ModalInvoice = ({ onCreateDiscount }) => {
   const [form] = Form.useForm();
@@ -30,7 +31,7 @@ const ModalInvoice = ({ onCreateDiscount }) => {
 
   return (
     <>
-      <Button type="primary" style={{ width: '6rem' }} onClick={showModal}>
+      <Button type="primary" style={{ width: '7rem', borderRadius:'1px' }} onClick={showModal} icon={<PlusCircleOutlined/>}>
         Tạo ưu đãi
       </Button>
 

@@ -1,5 +1,16 @@
 import { instance } from "../utils/axiosCustomize";
 
+
+const searchDiscount=(maUuDai,ngayBatDau,ngayKetThuc,trangThai)=>{
+  return instance.get(`api-public/uu-dais/search`,{
+    params:{
+      maUuDai: maUuDai,
+      ngayBatDau: ngayBatDau,
+      ngayKetThuc: ngayKetThuc,
+      trangThaiUuDai: trangThai,
+    }
+  })
+}
 const createDiscount=(data)=>{
   return instance.post(`api-public/uu-dais`,data);
 }
@@ -19,8 +30,6 @@ const deleteDiscount = (id) => {
 const updateDiscount = (id, discountData) => {
   return instance.put(`api-public/uu-dais/${id}`, discountData);
 };
-
-
 
 const createUser = (email, password, username, role, image) => {
   const data = new FormData();
@@ -84,4 +93,5 @@ export {
   deleteDiscount,
   updateDiscount,
   createDiscount,
+  searchDiscount,
 };

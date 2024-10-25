@@ -5,7 +5,6 @@ import "./index.scss";
 import ModalCourses from '../modalCousres';
 
 const { RangePicker } = DatePicker;
-
 const ClassCourses = (props) => {
   const [inputValue, setInputValue] = useState('');
   const [selectedDates, setSelectedDates] = useState([]);
@@ -52,5 +51,3 @@ const ClassCourses = (props) => {
     );
   };
   export default ClassCourses;
-
-
