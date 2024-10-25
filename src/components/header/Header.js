@@ -102,6 +102,7 @@ function BasicExample() {
         onCancel={handleCancel}
         okText="Đồng ý"
         cancelText="Hủy"
+        
       >
         <p>Bạn có chắc chắn muốn đăng xuất không?</p>
       </Modal>

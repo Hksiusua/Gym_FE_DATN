@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Table, message, Button, Popconfirm, Modal, Form, Input, DatePicker, InputNumber, Switch } from 'antd';
+import { Table, message, Button, Modal, Form, Input, DatePicker, InputNumber, Switch } from 'antd';
 import { getDiscounts, deleteDiscount, updateDiscount } from '../../../../../service/apiService';
 import dayjs from 'dayjs';
 
-const TableDiscount = () => {
+const TableDiscount = ({ discounts, onFetchDiscounts }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -38,8 +38,7 @@ const TableDiscount = () => {
         await deleteDiscount(id);
       }
       message.success('Xóa ưu đãi thành công');
-      const response = await getDiscounts();
-      setDataSource(response.data);
+      onFetchDiscounts(); 
     } catch (error) {
       message.error('Xóa ưu đãi thất bại');
     } finally {
@@ -47,7 +46,7 @@ const TableDiscount = () => {
       setSelectedRowKeys([]);
     }
   };
-
+  
   const showUpdateModal = (record) => {
     setCurrentRecord(record);
     form.setFieldsValue({
@@ -73,8 +72,7 @@ const TableDiscount = () => {
     
     await updateDiscount(currentRecord.maUuDai, discountData);
     message.success('Cập nhật ưu đãi thành công');
-    const response = await getDiscounts();
-    setDataSource(response.data);
+    onFetchDiscounts(); ;
     setIsModalVisible(false);
   };
   
@@ -133,25 +131,28 @@ const TableDiscount = () => {
     },
   ];
 
+  const showConfirm = () => {
+    Modal.confirm({
+        title: "Bạn có chắc muốn xóa không?",
+        content: `Bạn đang cố gắng xóa ${selectedRowKeys.length} ưu đãi.`,
+        okText: "Có",
+        okType: "danger",
+        cancelText: "Không",
+        onOk: handleDelete,  
+    });
+};
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
-        <span>Danh sách ưu đãi</span>
-        {selectedRowKeys.length > 0 && (
-          <Popconfirm
-            title="Bạn có chắc muốn xóa không?"
-            onConfirm={handleDelete}
-            okText="Có"
-            cancelText="Không"
-          >
-            <Button type="danger" style={{ backgroundColor: "red", color: 'white' }}>Xóa ({selectedRowKeys.length})</Button>
-          </Popconfirm>
-        )}
+          {selectedRowKeys.length > 0 && (
+              <Button type="danger" style={{ backgroundColor: "red", color: 'white' }} onClick={showConfirm}>
+                  Xóa ({selectedRowKeys.length})
+             </Button>
+          )}
       </div>
-
       <Table
         rowSelection={rowSelection}
-        dataSource={dataSource}
+        dataSource={discounts}
         columns={columns}
         loading={loading}
         pagination={{ pageSize: 10 }}
