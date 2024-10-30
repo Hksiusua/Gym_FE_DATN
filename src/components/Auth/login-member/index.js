@@ -1,52 +1,50 @@
 import { useState } from "react";
-import "./Login.scss";
+import "./index.scss";
 import { useNavigate } from "react-router-dom";
-import { postLoginUser } from "../service/apiService";
+import { postLoginMember } from "../../service/apiService";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux"; 
-import { doLogin } from "../../store/userSlice";
+import { doLogin } from "../../../store/userSlice";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'; 
 import { CheckOutlined } from '@ant-design/icons'; 
 import { Button } from 'antd';
 
-const Login = () => {
+const LoginMember = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleLogin = async (e) => {
     e.preventDefault(); 
-    let res = await postLoginUser(email, password);
-    console.log(res);
+    let res = await postLoginMember(email, password);
     if (res && res?.data?.accessToken) {
       const defaultUser = {
         username: "Guest",
         email: email 
       };
-  
+
       dispatch(doLogin({
         user: {
-          username: res?.data?.tenNguoiDung || defaultUser.username,
+          username: res?.data?.tenThanhVien || defaultUser.username,
         },
         accessToken: res?.data?.accessToken,
-        role: res?.data?.role 
+        maThanhVien: res?.data?.maThanhVien 
       }));
-      
+
       localStorage.setItem('accessToken', res?.data?.accessToken);
-      localStorage.setItem('role', res?.data?.role);
       localStorage.setItem('user', JSON.stringify({
-        username: res?.data?.tenNguoiDung || defaultUser.username,
+        username: res?.data?.tenThanhVien || defaultUser.username,
       }));
-      
+
       navigate('/home');
       toast.success("Đăng nhập thành công");
     } else {
       toast.error("Đăng nhập thất bại");    
     }
   };
-  
 
   return (
     <section className="vh-100">
@@ -59,9 +57,8 @@ const Login = () => {
             <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
               <form style={{ width: "23rem" }} onSubmit={handleLogin}>
                 <h3 className="fw-normal mb-3 pb-3 fw-bold" style={{ letterSpacing: "1px" }}>Sức khỏe là tất cả</h3>
-
                 <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="form2Example18">Username</label>
+                  <label className="form-label" htmlFor="form2Example18">Username</label>
                   <input 
                     type="text" 
                     id="form2Example18" 
@@ -73,7 +70,7 @@ const Login = () => {
                 </div>
 
                 <div className="form-outline mb-4 position-relative">
-                <label className="form-label" htmlFor="form2Example28">Password</label>
+                  <label className="form-label" htmlFor="form2Example28">Password</label>
                   <input 
                     type={showPassword ? "text" : "password"} 
                     id="form2Example28" 
@@ -93,11 +90,11 @@ const Login = () => {
 
                 <div className="pt-1 mb-4">
                   <Button 
-                  type="primary" 
-                  size="large" 
-                  block 
-                  htmlType="submit" 
-                  icon={<CheckOutlined />} 
+                    type="primary" 
+                    size="large" 
+                    block 
+                    htmlType="submit" 
+                    icon={<CheckOutlined />} 
                   >
                     Đăng nhập
                   </Button>
@@ -119,4 +116,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginMember;

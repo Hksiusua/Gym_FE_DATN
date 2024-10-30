@@ -1,5 +1,24 @@
 import { instance } from "../utils/axiosCustomize";
 
+const getAllClassCourses=()=>{
+ return instance.get('api-public/lophoc/getAllLopHoc');
+}
+
+const deleteClassCourses=(maLopHoc)=>{
+  return instance.delete(`api-public/lophoc/delete/${maLopHoc}`);
+}
+
+const createClassCourses=(data)=>{
+  return instance.post(`api-public/lophoc/add`,data);
+}
+
+const updateClassCouses=async(id, data)=>{
+  return await instance.put(`api-public/lophoc/update/${id}`,data)
+}
+
+const getHistoriesTranning=async(id)=>{
+  return await instance.get(`api-public/lichsutapluyen/thanhvien/${id}`)
+}
 
 const searchDiscount=(maUuDai,ngayBatDau,ngayKetThuc,trangThai)=>{
   return instance.get(`api-public/uu-dais/search`,{
@@ -13,6 +32,10 @@ const searchDiscount=(maUuDai,ngayBatDau,ngayKetThuc,trangThai)=>{
 }
 const createDiscount=(data)=>{
   return instance.post(`api-public/uu-dais`,data);
+}
+
+const postLoginMember=(tenThanhVien,matKhauNguoiDung)=>{
+  return instance.post(`member/login`,{tenThanhVien,matKhauNguoiDung});
 }
 
 const postLoginUser = (tenNguoiDung, matKhauNguoiDung) => {
@@ -94,4 +117,10 @@ export {
   updateDiscount,
   createDiscount,
   searchDiscount,
+  postLoginMember,
+  getAllClassCourses,
+  createClassCourses,
+  updateClassCouses,
+  deleteClassCourses,
+  getHistoriesTranning
 };

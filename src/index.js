@@ -26,14 +26,15 @@ import HistoriesTranning from "./components/histories-tranning";
 import Invoice from "./components/admin/content/invoice";
 import ProtectedRoute from "./components/protected-router";
 import { LoadingProvider, useLoading } from "./loadingContext";
+import LoginMember from "./components/Auth/login-member";
+import HistoriesMember from "./components/histories-tranningMember";
 
 const LoadingTransition = () => {
   const { setLoading } = useLoading();
   const location = useLocation();
 
   React.useEffect(() => {
-    // Kiểm tra nếu đường dẫn không phải là đường dẫn đăng xuất
-    if (location.pathname !== "/logins") {
+    if (location.pathname !== "admin/logins") {
       setLoading(true);
       const timer = setTimeout(() => {
         setLoading(false);
@@ -58,6 +59,7 @@ root.render(
             <Route path="/home" element={<HomePage />} />
             <Route path="/users" element={<User />} />
             <Route path="/services-page" element={<ServicePage />} />
+            <Route path="/histories/member" element={<HistoriesMember/>}/>
           </Route>
           <Route path="/admins" element={<ProtectedRoute><Admin /></ProtectedRoute>}>
             <Route index element={<ClassCourses />} />
@@ -72,7 +74,8 @@ root.render(
               <Route path="customers" element={<Customers />} />
             </Route>
           </Route>
-          <Route path="/logins" element={<Login />} />
+          <Route path="admin/logins" element={<Login />} />
+          <Route path="/member/logins" element={<LoginMember/>}/>
           <Route path="/registers" element={<Register />} />
         </Routes>
         <ToastContainer

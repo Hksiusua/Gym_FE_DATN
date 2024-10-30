@@ -12,6 +12,7 @@ function BasicExample() {
   const dispatch = useDispatch(); 
   const { isAuthenticated, user } = useSelector((state) => state.user || {});
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const role = localStorage.getItem('role');
 
   const showLogoutConfirm = () => {
     setIsModalVisible(true);
@@ -52,13 +53,13 @@ function BasicExample() {
                 Trang chủ
               </NavLink>
             </Menu.Item>
-            {isAuthenticated && (
+            {isAuthenticated && role === "Admin" && (
               <Menu.Item key="2">
                 <NavLink to="/admins" className="nav-link">
                   Admin
                 </NavLink>
               </Menu.Item>
-             )} 
+            )}
             <Menu.Item key="3">
               <NavLink to="/services-page" className="nav-link">
                 Dịch vụ
@@ -69,6 +70,13 @@ function BasicExample() {
                 Giới thiệu
               </NavLink>
             </Menu.Item>
+            {isAuthenticated && (
+              <Menu.Item key="5">
+                <NavLink to="/histories/member" className="nav-link">
+                  Lịch sử tập luyện
+                </NavLink>
+              </Menu.Item>
+            )}
           </Menu>
         </div>
 
@@ -76,15 +84,10 @@ function BasicExample() {
           {!isAuthenticated ? (
             <>
               <Button style={{ marginRight: '5%', backgroundColor:'orange', color:'white', border: '1px solid black'}}>
-                <NavLink to="/logins" className="nav-link">
+                <NavLink to="/member/logins" className="nav-link">
                   Đăng nhập
                 </NavLink>
               </Button>
-              {/* <Button style={{ backgroundColor:'orange',color:'white',border: '1px solid black'}}>
-                <NavLink to="/registers" className="nav-link">
-                  Sign up
-                </NavLink>
-              </Button> */}
             </>
           ) : (
             <Dropdown overlay={menu}>
@@ -102,7 +105,6 @@ function BasicExample() {
         onCancel={handleCancel}
         okText="Đồng ý"
         cancelText="Hủy"
-        
       >
         <p>Bạn có chắc chắn muốn đăng xuất không?</p>
       </Modal>
