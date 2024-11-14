@@ -1,5 +1,4 @@
-import "./HomePage.scss";
-import { useSelector } from "react-redux";
+import "./index.scss";
 import CustomCarousel from "./banner"; 
 import Choose from "./choose";
 import Advantage from "./advantage";

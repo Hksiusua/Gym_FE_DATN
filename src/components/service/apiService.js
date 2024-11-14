@@ -1,5 +1,29 @@
 import { instance } from "../utils/axiosCustomize";
 
+const createRegisterAndMember = async (maGoiTap, data) => {
+  return await instance.post(`user/register?maGoiTap=${maGoiTap}`, data);
+};
+
+const getAllMember=async()=>{
+  return await instance.get(`member/api-public/members/doGetALlMember`);
+}
+
+const createQRCode=async(data)=>{
+  return await instance.post(`api-public/qrcode/generateQRCode`,data);
+}
+
+const createPayMoney=async(data)=>{
+  return await instance.post(`api-public/thanh-toan/create`,data);
+}
+
+const getAllPayMoney=async()=>{
+  return await instance.get('api-public/thanh-toan/all');
+}
+
+const getAllInVoice=()=>{
+  return instance.get(`api-public/registration`);
+}
+
 const getAllClassCourses=()=>{
  return instance.get('api-public/lophoc/getAllLopHoc');
 }
@@ -18,6 +42,18 @@ const updateClassCouses=async(id, data)=>{
 
 const getHistoriesTranning=async(id)=>{
   return await instance.get(`api-public/lichsutapluyen/thanhvien/${id}`)
+}
+
+const searchClassCourse=(maLopHoc,tenLopHoc,moTaLopHoc,giaLopHoc,lichHoc)=>{
+  return instance.get(`api-public/lophoc/search`,{
+    params:{
+      maLopHoc:maLopHoc,
+      tenLopHoc:tenLopHoc,
+      moTaLopHoc:moTaLopHoc,
+      giaLopHoc:giaLopHoc,
+      lichHoc:lichHoc,
+    }
+  })
 }
 
 const searchDiscount=(maUuDai,ngayBatDau,ngayKetThuc,trangThai)=>{
@@ -122,5 +158,12 @@ export {
   createClassCourses,
   updateClassCouses,
   deleteClassCourses,
-  getHistoriesTranning
+  getHistoriesTranning,
+  getAllInVoice,
+  getAllPayMoney,
+  searchClassCourse,
+  createPayMoney,
+  createQRCode,
+  getAllMember,
+  createRegisterAndMember,
 };

@@ -6,7 +6,7 @@ import { setLichSuTapLuyen } from "../../store/userSlice"
 import { CheckCircleOutlined } from '@ant-design/icons';
 
 const HistoriesMember = (props) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [events, setEvents] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);

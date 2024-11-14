@@ -47,7 +47,7 @@ const SideBar = () => {
             </Link>
           </MenuItem>
           <MenuItem className={`ps-menu-button ${isManagerActive ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
-            <Link to="/admins/managers/employees" className="nav-link">
+            <Link to="/admins/managers/members" className="nav-link">
               <SolutionOutlined className="copy-icon" />  {!collapsed && "Quản lí"}
             </Link>
           </MenuItem>
@@ -61,9 +61,19 @@ const SideBar = () => {
               <SolutionOutlined className="copy-icon" />  {!collapsed && "Hóa đơn"}
             </Link>
           </MenuItem>
+          <MenuItem className={`ps-menu-button ${isActive("/admins/pay-monney") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
+            <Link to="/admins/pay-monney" className="nav-link">
+              <SolutionOutlined className="copy-icon" />  {!collapsed && "Thanh toán"}
+            </Link>
+          </MenuItem>
           <MenuItem className={`ps-menu-button ${isActive("/admins/package-courses") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
             <Link to="/admins/package-courses" className="nav-link">
               <SolutionOutlined className="copy-icon" />  {!collapsed && "Gói tập"}
+            </Link>
+          </MenuItem>
+          <MenuItem className={`ps-menu-button ${isActive("/admins/qr-code") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
+            <Link to="/admins/qr-code" className="nav-link">
+              <SolutionOutlined className="copy-icon" />  {!collapsed && "QR Code"}
             </Link>
           </MenuItem>
         </Menu>

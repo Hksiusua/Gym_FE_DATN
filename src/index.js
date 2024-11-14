@@ -8,19 +8,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import User from "./components/user/User";
 import Admin from "./components/admin/Admin";
-import HomePage from "./components/home/HomePage";
+import HomePage from "./components/home/index";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ServicePage from "./components/service-page";
-import DashBoard from "./components/admin/content/DashBoard";
 import PackageCourses from "./components/admin/content/packageCourses";
 import ClassCourses from "./components/admin/content/classCourses";
 import News from "./components/admin/content/news";
 import Discounts from "./components/admin/content/discount";
 import Managers from "./components/admin/content/managers";
-import Employees from "./components/admin/content/managers/employees";
+import Members from "./components/admin/content/managers/members";
 import Customers from "./components/admin/content/managers/customers";
 import HistoriesTranning from "./components/histories-tranning";
 import Invoice from "./components/admin/content/invoice";
@@ -28,6 +27,9 @@ import ProtectedRoute from "./components/protected-router";
 import { LoadingProvider, useLoading } from "./loadingContext";
 import LoginMember from "./components/Auth/login-member";
 import HistoriesMember from "./components/histories-tranningMember";
+import PayMoney from "./components/admin/content/payMoney";
+import { QRCode } from "antd";
+import QrCodeForm from "./components/admin/content/qrCode";
 
 const LoadingTransition = () => {
   const { setLoading } = useLoading();
@@ -69,12 +71,14 @@ root.render(
             <Route path="discounts" element={<Discounts />} />
             <Route path="histories-traning" element={<HistoriesTranning />} />
             <Route path="invoice" element={<Invoice />} />
+            <Route path="pay-monney" element={<PayMoney/>}/>
+            <Route path="qr-code" element={<QrCodeForm />} />
             <Route path="managers" element={<Managers />} >
-              <Route path="employees" element={<Employees />} />
+              <Route path="members" element={<Members />} />
               <Route path="customers" element={<Customers />} />
             </Route>
           </Route>
-          <Route path="admin/logins" element={<Login />} />
+          <Route path="/admin/logins" element={<Login />} />
           <Route path="/member/logins" element={<LoginMember/>}/>
           <Route path="/registers" element={<Register />} />
         </Routes>

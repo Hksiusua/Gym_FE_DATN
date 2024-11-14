@@ -65,7 +65,7 @@ const Discounts = () => {
   return (
     <div className="courses-page">
       <div className="list-discount">
-        <span style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
+        <span style={{ fontWeight: 'bold', fontSize: '2wh' }}>
           Danh sách ưu đãi ({tongUuDai})
         </span>
         <ModalInvoice onCreateDiscount={handleCreateDiscount} />

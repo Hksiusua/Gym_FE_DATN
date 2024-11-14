@@ -1,12 +1,28 @@
 import TableNew from "../TableNew";
-import React, { useState } from 'react';
-import { Input, Button, DatePicker } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Input, Button, DatePicker, message } from 'antd';
 import ModalCourses from '../modalCousres';
+import { getAllInVoice } from '../../../service/apiService';
 
 const { RangePicker } = DatePicker;
-const Invoice = (props) => {
+const Invoice = () => {
   const [inputValue, setInputValue] = useState('');
   const [selectedDates, setSelectedDates] = useState([]);
+  const [invoice,setInvoice]=useState([]);
+ 
+  useEffect(()=>{
+    fetchDataInvoice();
+  },[])
+
+  const fetchDataInvoice=async()=>{
+    try {
+      const response=await getAllInVoice();
+      message.success("Lấy dữ liệu thành công")
+      console.log(response);      
+    } catch (error) {
+    }
+    
+  }
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
