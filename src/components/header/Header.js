@@ -66,8 +66,8 @@ function BasicExample() {
               </NavLink>
             </Menu.Item>
             <Menu.Item key="4">
-              <NavLink to="/users" className="nav-link">
-                Giới thiệu
+              <NavLink to="/scanQR" className="nav-link">
+              Quét mã QR
               </NavLink>
             </Menu.Item>
             {isAuthenticated && (

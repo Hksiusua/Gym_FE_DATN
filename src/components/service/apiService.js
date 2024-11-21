@@ -1,5 +1,15 @@
 import { instance } from "../utils/axiosCustomize";
 
+const createRegistrationBill = async (data) => {
+  return await instance.post(`api-public/registration`, data);
+};
+
+
+const createRegisterWithDiscount = async (params) => {
+  return await instance.post(`api-public/dang-ky-goi/with-discount`, null, {
+    params,
+  });
+};
 const createRegisterAndMember = async (maGoiTap, data) => {
   return await instance.post(`user/register?maGoiTap=${maGoiTap}`, data);
 };
@@ -27,6 +37,9 @@ const getAllInVoice=()=>{
 const getAllClassCourses=()=>{
  return instance.get('api-public/lophoc/getAllLopHoc');
 }
+const getHistoriesTranningAdmin=()=>{
+  return instance.get('api-public/lichsutapluyen/thanhvien/');
+ }
 
 const deleteClassCourses=(maLopHoc)=>{
   return instance.delete(`api-public/lophoc/delete/${maLopHoc}`);
@@ -138,6 +151,7 @@ const postFinishQuiz = (data) => {
 };
 
 export {
+  createRegisterWithDiscount,
   createUser,
   showAllUser,
   putUpdateUser,
@@ -166,4 +180,6 @@ export {
   createQRCode,
   getAllMember,
   createRegisterAndMember,
+  getHistoriesTranningAdmin,
+  createRegistrationBill
 };

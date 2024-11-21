@@ -21,7 +21,7 @@ import Discounts from "./components/admin/content/discount";
 import Managers from "./components/admin/content/managers";
 import Members from "./components/admin/content/managers/members";
 import Customers from "./components/admin/content/managers/customers";
-import HistoriesTranning from "./components/histories-tranning";
+import HistoriesTranning from "./components/admin/content/histories-tranning";
 import Invoice from "./components/admin/content/invoice";
 import ProtectedRoute from "./components/protected-router";
 import { LoadingProvider, useLoading } from "./loadingContext";
@@ -30,6 +30,7 @@ import HistoriesMember from "./components/histories-tranningMember";
 import PayMoney from "./components/admin/content/payMoney";
 import { QRCode } from "antd";
 import QrCodeForm from "./components/admin/content/qrCode";
+import ScanQRCode from "./components/ScanQRCode";
 
 const LoadingTransition = () => {
   const { setLoading } = useLoading();
@@ -59,7 +60,7 @@ root.render(
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/" element={<App />}>
             <Route path="/home" element={<HomePage />} />
-            <Route path="/users" element={<User />} />
+            <Route path="/scanQR" element={<ScanQRCode />} />
             <Route path="/services-page" element={<ServicePage />} />
             <Route path="/histories/member" element={<HistoriesMember/>}/>
           </Route>
@@ -74,8 +75,8 @@ root.render(
             <Route path="pay-monney" element={<PayMoney/>}/>
             <Route path="qr-code" element={<QrCodeForm />} />
             <Route path="managers" element={<Managers />} >
-              <Route path="members" element={<Members />} />
-              <Route path="customers" element={<Customers />} />
+              <Route path="members" element={<Customers  />} />
+              <Route path="customers" element={<Members />}/>
             </Route>
           </Route>
           <Route path="/admin/logins" element={<Login />} />

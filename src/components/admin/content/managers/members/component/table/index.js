@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Table } from 'antd';
 import dayjs from 'dayjs';
 
-// Bảng TableMembers để hiển thị danh sách thành viên
 const TableMembers = ({ onMembers }) => {
-  // Cấu hình các cột hiển thị
   const columns = [
     {
       title: 'Mã Thành Viên',
@@ -33,16 +31,23 @@ const TableMembers = ({ onMembers }) => {
       render: (text) => dayjs(text).format('DD-MM-YYYY'),
     },
     {
-      title: 'QR Định Danh',
-      dataIndex: 'duLieuQrDinhDanh',
-      key: 'duLieuQrDinhDanh',
-      render: (data) => data || 'N/A',
-    },
-    {
       title: 'Mật Khẩu',
       dataIndex: 'matKhauNguoiDung',
       key: 'matKhauNguoiDung',
-      render: (password) => password ? "********" : "N/A", 
+      render: (password) => (password ? '********' : 'N/A'),
+    },
+    {
+      title: 'QR Code',
+      dataIndex: 'duLieuQrDinhDanh',
+      key: 'duLieuQrDinhDanh',
+      render: (qrData, record) =>
+        qrData ? (
+          <a href={qrData} download={`QR_Code_${record.maThanhVien}.png`}>
+            <img src={qrData} alt="QR Code" style={{ width: 50, height: 50 }} />
+          </a>
+        ) : (
+          'N/A'
+        ),
     },
   ];
 
@@ -50,7 +55,7 @@ const TableMembers = ({ onMembers }) => {
     <Table 
       dataSource={onMembers} 
       columns={columns} 
-      rowKey="maThanhVien"
+      rowKey="maThanhVien" 
       pagination={{ pageSize: 5 }} 
     />
   );

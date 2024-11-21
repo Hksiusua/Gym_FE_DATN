@@ -10,6 +10,18 @@ const TablePayMoney = ({ onPay }) => {
             key: 'maThanhToan',
         },
         {
+            title: 'Mã Đăng Ký',
+            dataIndex: ['hoaDon', 'dangkys'], // Truy cập vào `dangkys`
+            key: 'maDangKy',
+            render: (dangkys) => (
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {dangkys.map((dangky) => (
+                  <li key={dangky.maDangKy}>{dangky.maDangKy}</li>
+                ))}
+              </ul>              
+            ),
+          },
+        {
             title: 'Ngày Thanh Toán',
             dataIndex: 'ngayThanhToan',
             key: 'ngayThanhToan',

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllMember,createRegisterAndMember } from '../../../../service/apiService';
-import TableMembers from "./component/table";
+import TableCustomer from "./component/table";
 import { message } from "antd";
 import ModalMember from "./component/modalMembers";
  
@@ -36,7 +36,7 @@ const Members = () => {
         <ModalMember onCreateMember={handleCreateMember} />
       </div>
       <div className="table-container">
-        <TableMembers onMembers={member}/>
+        <TableCustomer onMembers={member}/>
       </div>
     </div>
   );

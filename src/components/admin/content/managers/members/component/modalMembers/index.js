@@ -19,7 +19,7 @@ const ModalMember = ({ onCreateMember }) => {
         emailThanhVien: values.emailThanhVien,
         matKhauNguoiDung: values.matKhauNguoiDung,
         soDienThoaiThanhVien: values.soDienThoaiThanhVien,
-        ngaySinhThanhVien: values.ngaySinhThanhVien.format('YYYY-MM-DD'), // Định dạng ngày
+        ngaySinhThanhVien: values.ngaySinhThanhVien.format('YYYY-MM-DD'),
         duLieuQrDinhDanh: values.duLieuQrDinhDanh,
       };
       onCreateMember(1, memberData); 

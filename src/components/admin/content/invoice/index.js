@@ -1,70 +1,154 @@
-import TableNew from "../TableNew";
 import React, { useEffect, useState } from 'react';
-import { Input, Button, DatePicker, message } from 'antd';
-import ModalCourses from '../modalCousres';
-import { getAllInVoice } from '../../../service/apiService';
+import { Button, Modal, Input, DatePicker, message } from 'antd';
+import { getAllInVoice, createRegisterWithDiscount, createRegistrationBill } from '../../../service/apiService';
+import TableInvoice from './component/table';
 
-const { RangePicker } = DatePicker;
 const Invoice = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [selectedDates, setSelectedDates] = useState([]);
-  const [invoice,setInvoice]=useState([]);
- 
-  useEffect(()=>{
+  const [modalVisible, setModalVisible] = useState(false);
+  const [invoiceModalVisible, setInvoiceModalVisible] = useState(false);
+  const [activationDate, setActivationDate] = useState('');
+  const [memberId, setMemberId] = useState('');
+  const [packageId, setPackageId] = useState('');
+  const [classId, setClassId] = useState('');
+  const [invoiceData, setInvoiceData] = useState([]);
+  const [invoiceDetails, setInvoiceDetails] = useState({
+    maDangKy: '',
+    ngayDangKy: '',
+  });
+
+  useEffect(() => {
     fetchDataInvoice();
-  },[])
+  }, []);
 
-  const fetchDataInvoice=async()=>{
+  const fetchDataInvoice = async () => {
     try {
-      const response=await getAllInVoice();
-      message.success("Lấy dữ liệu thành công")
-      console.log(response);      
+      const response = await getAllInVoice();
+      if (response.data.data) {
+        setInvoiceData(response.data.data);
+        message.success('Lấy dữ liệu thành công');
+      }
     } catch (error) {
-    }
-    
-  }
-
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleDateChange = (dates, dateStrings) => {
-    setSelectedDates(dateStrings);
-  };
-
-  const handleSubmit = () => {
-    if (selectedDates.length === 2) {
-      alert(`Bạn đã nhập: ${inputValue}, Ngày bắt đầu: ${selectedDates[0]}, Ngày kết thúc: ${selectedDates[1]}`);
-    } else {
-      alert("Vui lòng chọn khoảng thời gian");
+      message.error('Không thể lấy dữ liệu hóa đơn');
     }
   };
-    return (
-      <div className="courses-page">
-        <div className="input-page">
+
+  const handleCreateInvoice = async () => {
+    if (!memberId || !packageId || !classId || !activationDate) {
+      message.warning('Vui lòng nhập đầy đủ thông tin trước khi đăng ký!');
+      return;
+    }
+
+    const params = {
+      maThanhVien: memberId,
+      maGoiUuDai: packageId,
+      maLopHoc: classId,
+      ngayKichHoat: activationDate,
+      trangThaiDangKy: true,
+    };
+
+    try {
+      const response = await createRegisterWithDiscount(params);
+      if (response.data) {
+        message.success('Đăng ký thành công');
+        fetchDataInvoice();
+        setModalVisible(false); 
+      }
+    } catch (error) {
+      message.error('Đăng ký thất bại');
+    }
+  };
+
+  const handleCreateRegistrationBill = async () => {
+    if (!invoiceDetails.maDangKy || !invoiceDetails.ngayDangKy) {
+      message.warning('Vui lòng nhập đầy đủ thông tin hóa đơn!');
+      return;
+    }
+
+    const params = {
+      ...invoiceDetails,
+    };
+
+    try {
+      const response = await createRegistrationBill(params);
+      if (response.data) {
+        message.success('Hóa đơn được tạo thành công');
+        fetchDataInvoice(); // Cập nhật danh sách hóa đơn
+        setInvoiceModalVisible(false); // Đóng modal
+      }
+    } catch (error) {
+      message.error('Tạo hóa đơn thất bại');
+    }
+  };
+
+  return (
+    <div className="courses-page">
+      <Button type="primary" onClick={() => setModalVisible(true)} style={{ marginBottom: '20px' }}>
+        Đăng ký gói ưu đãi
+      </Button>
+      <Button type="primary" onClick={() => setInvoiceModalVisible(true)} style={{ marginBottom: '20px', marginLeft: '10px' }}>
+        Tạo hóa đơn
+      </Button>
+
+      {/* Modal đăng ký gói ưu đãi */}
+      <Modal
+        title="Đăng ký gói ưu đãi"
+        visible={modalVisible}
+        onOk={handleCreateInvoice}
+        onCancel={() => setModalVisible(false)}
+        okText="Xác nhận"
+        cancelText="Hủy"
+      >
         <Input
-        placeholder="Tên khóa học"
-        value={inputValue}
-        onChange={handleInputChange}
-        style={{ width: "100%"}}
+          placeholder="Nhập mã thành viên"
+          value={memberId}
+          onChange={(e) => setMemberId(e.target.value)}
+          style={{ width: '100%', marginBottom: '10px' }}
         />
-        <RangePicker
-        onChange={handleDateChange}
-        style={{ width: "100%"}}
-        placeholder={['Ngày bắt đầu', 'Ngày kết thúc']}
+        <Input
+          placeholder="Nhập mã gói ưu đãi"
+          value={packageId}
+          onChange={(e) => setPackageId(e.target.value)}
+          style={{ width: '100%', marginBottom: '10px' }}
         />
-        <Button type="primary" onClick={handleSubmit} style={{width:'100%'}}>
-        Tìm kiếm
-        </Button>
-        <ModalCourses />
-        </div>
-        <div className="table-container">
-        <TableNew/>       
-        </div>
+        <Input
+          placeholder="Nhập mã lớp học"
+          value={classId}
+          onChange={(e) => setClassId(e.target.value)}
+          style={{ width: '100%', marginBottom: '10px' }}
+        />
+        <DatePicker
+          onChange={(date, dateString) => setActivationDate(dateString)}
+          style={{ width: '100%' }}
+          placeholder="Ngày kích hoạt"
+        />
+      </Modal>
+
+      <Modal
+        title="Tạo hóa đơn"
+        visible={invoiceModalVisible}
+        onOk={handleCreateRegistrationBill}
+        onCancel={() => setInvoiceModalVisible(false)}
+        okText="Xác nhận"
+        cancelText="Hủy"
+      >
+        <Input
+          placeholder="Nhập mã đăng ký"
+          value={invoiceDetails.maDangKy}
+          onChange={(e) => setInvoiceDetails({ ...invoiceDetails, maDangKy: e.target.value })}
+          style={{ width: '100%', marginBottom: '10px' }}
+        />
+        <DatePicker
+          onChange={(date, dateString) => setInvoiceDetails({ ...invoiceDetails, ngayDangKy: dateString })}
+          style={{ width: '100%' }}
+          placeholder="Ngày đăng ký"
+        />
+      </Modal>
+
+      <div className="table-container">
+        <TableInvoice data={invoiceData} />
       </div>
-      
-    );
-  };
-  export default Invoice;
+    </div>
+  );
+};
 
-
+export default Invoice;
