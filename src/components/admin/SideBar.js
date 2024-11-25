@@ -4,6 +4,12 @@ import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleChevronLeft, faCircleChevronRight } from "@fortawesome/free-solid-svg-icons"; 
 import { FormOutlined, FileSearchOutlined, FileOutlined, SolutionOutlined } from "@ant-design/icons";
+import DiscountIcon from '@mui/icons-material/Discount';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import PaymentIcon from '@mui/icons-material/Payment';
+import Inventory2Icon from '@mui/icons-material/Inventory2';
 import "./SideBar.scss";
 import "./Admin.scss";
 
@@ -43,32 +49,32 @@ const SideBar = () => {
           </MenuItem> */}
           <MenuItem className={`ps-menu-button ${isActive("/admins/discounts") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
             <Link to="/admins/discounts" className="nav-link">
-              <FileOutlined className="copy-icon" />  {!collapsed && "Khuyến mãi"}
+              <DiscountIcon/> {!collapsed && "Khuyến mãi"}
             </Link>
           </MenuItem>
           <MenuItem className={`ps-menu-button ${isManagerActive ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
             <Link to="/admins/managers/members" className="nav-link">
-              <SolutionOutlined className="copy-icon" />  {!collapsed && "Quản lí"}
+              <ManageAccountsIcon/>  {!collapsed && "Quản lí"}
             </Link>
           </MenuItem>
           <MenuItem className={`ps-menu-button ${isActive("/admins/histories-traning") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
             <Link to="/admins/histories-traning" className="nav-link">
-              <SolutionOutlined className="copy-icon" />  {!collapsed && "Lịch sử tập luyện"}
+              <ScheduleIcon/>  {!collapsed && "Lịch sử tập luyện"}
             </Link>
           </MenuItem>
           <MenuItem className={`ps-menu-button ${isActive("/admins/invoice") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
             <Link to="/admins/invoice" className="nav-link">
-              <SolutionOutlined className="copy-icon" />  {!collapsed && "Hóa đơn"}
+              <ReceiptLongIcon/>  {!collapsed && "Hóa đơn"}
             </Link>
           </MenuItem>
           <MenuItem className={`ps-menu-button ${isActive("/admins/pay-monney") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
             <Link to="/admins/pay-monney" className="nav-link">
-              <SolutionOutlined className="copy-icon" />  {!collapsed && "Thanh toán"}
+              <PaymentIcon/>  {!collapsed && "Thanh toán"}
             </Link>
           </MenuItem>
           <MenuItem className={`ps-menu-button ${isActive("/admins/package-courses") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
             <Link to="/admins/package-courses" className="nav-link">
-              <SolutionOutlined className="copy-icon" />  {!collapsed && "Gói tập"}
+              <Inventory2Icon/>  {!collapsed && "Gói tập"}
             </Link>
           </MenuItem>
           {/* <MenuItem className={`ps-menu-button ${isActive("/admins/qr-code") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>

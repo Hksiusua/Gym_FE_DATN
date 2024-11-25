@@ -1,0 +1,28 @@
+.split-button {
+    .MuiButton-root {
+      border: 1px solid #A4C7F2;  
+      background-color: #ffffff; 
+      color: #5d91c8;  
+      padding: 2px 6px;  
+      font-size: 13px;
+      &:hover {
+        background-color: #adc9eb;  
+        color: #3e88d2;  
+      }
+    }
+  
+    .MuiButton-contained {
+      box-shadow: none; 
+    }
+  
+    .MuiButtonGroup-grouped {
+      border-radius: 4px;  
+    }
+    
+    // Nếu muốn chỉnh sửa nút dropdown nhỏ
+    .MuiButton-sizeSmall {
+      border-left: none;  
+      padding: 2px 6px;
+    }
+  }
+  

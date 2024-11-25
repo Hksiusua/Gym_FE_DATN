@@ -31,6 +31,7 @@ import PayMoney from "./components/admin/content/payMoney";
 import { QRCode } from "antd";
 import QrCodeForm from "./components/admin/content/qrCode";
 import ScanQRCode from "./components/ScanQRCode";
+import Revevue from "./components/admin/revenue/revenue"; 
 
 const LoadingTransition = () => {
   const { setLoading } = useLoading();
@@ -82,6 +83,7 @@ root.render(
           <Route path="/admin/logins" element={<Login />} />
           <Route path="/member/logins" element={<LoginMember/>}/>
           <Route path="/registers" element={<Register />} />
+          <Route path="/revenue" element={<Revevue />} />
         </Routes>
         <ToastContainer
           position="top-right"
