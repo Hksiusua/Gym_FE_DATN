@@ -40,7 +40,7 @@ const SalesRevenue = (props) => {
         <Button type="primary" onClick={handleSubmit} style={{width:'100%'}}>
         Tìm kiếm
         </Button>
-        <ModalCourses />
+        <ModalCourses />  
         </div>
         <div className="table-container">
         <TableNew/>       
