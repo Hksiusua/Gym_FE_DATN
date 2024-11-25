@@ -3,7 +3,7 @@ import React from "react";
 import "./revenue.scss";  // Duy trì việc sử dụng SCSS của bạn cho styling
 import "../css/app.css";
 import "../js/app";
-import"../js/daskport"
+
 
 
 
