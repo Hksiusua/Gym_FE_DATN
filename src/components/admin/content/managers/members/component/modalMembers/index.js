@@ -85,13 +85,6 @@ const ModalMember = ({ onCreateMember }) => {
           >
             <DatePicker style={{ width: '100%' }} />
           </Form.Item>
-          <Form.Item
-            name="duLieuQrDinhDanh"
-            label="QR Định Danh"
-            rules={[{ required: false }]}
-          >
-            <Input />
-          </Form.Item>
         </Form>
       </Modal>
     </>

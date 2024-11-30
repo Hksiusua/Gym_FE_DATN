@@ -1,9 +1,12 @@
 import { instance } from "../utils/axiosCustomize";
 
+const createRegisterHistoriesMember = async(data) => {
+  return await instance.post ('api-public/lichsutapluyen/thanhvien/save',data);
+}
+
 const createRegistrationBill = async (data) => {
   return await instance.post(`api-public/registration`, data);
 };
-
 
 const createRegisterWithDiscount = async (params) => {
   return await instance.post(`api-public/dang-ky-goi/with-discount`, null, {
@@ -181,5 +184,6 @@ export {
   getAllMember,
   createRegisterAndMember,
   getHistoriesTranningAdmin,
-  createRegistrationBill
+  createRegistrationBill,
+  createRegisterHistoriesMember,
 };
