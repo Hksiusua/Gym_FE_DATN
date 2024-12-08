@@ -120,7 +120,6 @@ const QRScannerCamera = () => {
     }
   };
 
-  // Xử lý lỗi khi quét QR
   const handleError = (err) => {
     console.error("Error scanning QR Code:", err);
   };
@@ -141,7 +140,7 @@ const QRScannerCamera = () => {
     try {
       await createRegisterHistoriesMember(data);
       message.success("Đăng ký lịch sử tập luyện thành công.");
-      setModalVisible(false); // Đóng modal sau khi lưu thành công
+      setModalVisible(false);   
     } catch (error) {
       message.error("Đăng ký lịch sử tập luyện thất bại.");
     }

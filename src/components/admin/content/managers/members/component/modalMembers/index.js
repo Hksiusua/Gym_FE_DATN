@@ -21,6 +21,7 @@ const ModalMember = ({ onCreateMember }) => {
         soDienThoaiThanhVien: values.soDienThoaiThanhVien,
         ngaySinhThanhVien: values.ngaySinhThanhVien.format('YYYY-MM-DD'),
         duLieuQrDinhDanh: values.duLieuQrDinhDanh,
+        trangThaiThanhVien: true,  
       };
       onCreateMember(1, memberData); 
       setIsModalVisible(false);
@@ -29,6 +30,7 @@ const ModalMember = ({ onCreateMember }) => {
       console.error("Validation failed:", error);
     }
   };
+  
 
   const handleCancel = () => {
     setIsModalVisible(false);
