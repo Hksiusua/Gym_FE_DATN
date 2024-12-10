@@ -1,5 +1,41 @@
 import { instance } from "../utils/axiosCustomize";
 
+const createExportMemberExcel = async(data) => {
+  return await instance.post(`member/export`, null, {
+    params: {
+      name :data.name,
+      phone: data.phone,
+      email: data.email
+    },
+  })
+}
+
+const createPackageSale = async(data) => {
+  return await instance.post(`api/goi-uu-dai/save`,data);
+}
+
+const getAllPackageSale = async() => {
+  return await instance.get(`api/goi-uu-dai/all`)
+}
+
+const createPackageCourses = async(data) => {
+  return await instance.post(`api-public/goi-tap/add`,data)
+}
+
+const getAllPackageCourses = async() => {
+  return await instance.get(`api-public/goi-tap/getAllGoiTap`);
+}
+
+const getTotalRevenue = async(day, month, year)=>{
+  return await instance.get(`api/doanh-thu/calculate`,{
+    params: {
+      day: day ?? undefined, 
+      month: month ?? undefined,                
+      year: year ?? undefined,                 
+    },
+  })
+}
+
 const createRegisterHistoriesMember = async(data) => {
   return await instance.post ('api-public/lichsutapluyen/thanhvien/save',data);
 }
@@ -154,6 +190,12 @@ const postFinishQuiz = (data) => {
 };
 
 export {
+  createExportMemberExcel,
+  createPackageSale,
+  getAllPackageSale,
+  createPackageCourses,
+  getAllPackageCourses,
+  getTotalRevenue,
   createRegisterWithDiscount,
   createUser,
   showAllUser,

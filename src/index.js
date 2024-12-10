@@ -31,6 +31,8 @@ import PayMoney from "./components/admin/content/payMoney";
 import { QRCode } from "antd";
 import QrCodeForm from "./components/admin/content/qrCode";
 import ScanQRCode from "./components/ScanQRCode";
+import TotalRevenue from "./components/admin/content/totalRevenue";
+import PackageSale from "./components/admin/content/packageSale";
 
 const LoadingTransition = () => {
   const { setLoading } = useLoading();
@@ -74,6 +76,8 @@ root.render(
             <Route path="invoice" element={<Invoice />} />
             <Route path="pay-monney" element={<PayMoney/>}/>
             <Route path="qr-code" element={<QrCodeForm />} />
+            <Route path="total-revenue" element={<TotalRevenue/>}/>
+            <Route path="package-sale" element={<PackageSale/>}/>
             <Route path="managers" element={<Managers />} >
               <Route path="members" element={<Customers  />} />
               <Route path="customers" element={<Members />}/>

@@ -6,11 +6,16 @@ import BannerRegister from "./banner-register";
 import Footer from "../footer";
 import { useRef } from "react";
 import FormRegister from "../form-register";
+import { useSelector, useDispatch } from 'react-redux'; 
 
 const HomePage = (props) => {
+  const { isAuthenticated, user } = useSelector((state) => state.user || {});
   const formRef = useRef(null);
+
   const handleScrollToForm = () => {
-    formRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (!isAuthenticated) {
+      formRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -27,9 +32,11 @@ const HomePage = (props) => {
       <div>
         <BannerRegister onButtonClick={handleScrollToForm} />
       </div>
-      <div ref={formRef}> 
-        <FormRegister />
-      </div>
+      {!isAuthenticated && (
+        <div ref={formRef}>
+          <FormRegister />
+        </div>
+      )}
       <div>
         <Footer />
       </div>
@@ -38,3 +45,4 @@ const HomePage = (props) => {
 };
 
 export default HomePage;
+

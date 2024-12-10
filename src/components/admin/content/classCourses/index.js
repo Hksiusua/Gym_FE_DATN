@@ -96,7 +96,7 @@ const ClassCourses = () => {
   };
 
   return (
-    <div className="courses-page">
+    <div className="w-full overflow-auto">
       <div className="list-discount">
         <span style={{ fontWeight: 'bold', fontSize: '3wh' }}>
           {messages && <div>{messages}</div>}
@@ -106,7 +106,7 @@ const ClassCourses = () => {
       <div className="input-page">
         <FilterCourses onFilter={handleFilter} />
       </div>
-      <div className="table-container">
+      <div >
         <TableCourses courses={courses} onHandleUpdateCourses={handleUpdateCourses} onHandleDeleteCourses={handleDeleteCourses} />
       </div>
     </div>

@@ -1,16 +1,32 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import './index.scss';
+import { createExportMemberExcel } from "../service/apiService";
 
-const FormRegister = ({ registerFlag }) => {
+const FormRegister = () => {
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
+  const onFinish = async (values) => {
+    try {
+      console.log('Sending data to API:', values);
+
+      const response = await createExportMemberExcel({
+        name: values.name,
+        phone: values.phone,
+        email: values.email,
+      });
+
+      message.success("Đăng ký thành công!"); 
+      form.resetFields(); 
+    } catch (error) {
+      console.error("API Error:", error);
+      message.error("Đăng ký thất bại!"); 
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
+    message.error("Vui lòng kiểm tra lại thông tin!");
   };
 
   return (
@@ -23,8 +39,8 @@ const FormRegister = ({ registerFlag }) => {
           form={form}
           name="register"
           layout="vertical"
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+          onFinish={onFinish} 
+          onFinishFailed={onFinishFailed} 
         >
           <Form.Item
             label="Họ tên"
@@ -45,8 +61,22 @@ const FormRegister = ({ registerFlag }) => {
             <Input placeholder="Nhập số điện thoại" />
           </Form.Item>
 
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[
+              { required: true, message: 'Vui lòng nhập email!' },
+              { type: 'email', message: 'Email không hợp lệ!' }
+            ]}
+          >
+            <Input placeholder="Nhập email" />
+          </Form.Item>
+
           <Form.Item>
-            <Button htmlType="submit" style={{ width: '100%', backgroundColor: 'brown', color: 'white' }}>
+            <Button
+              htmlType="submit"
+              style={{ width: '100%', backgroundColor: 'brown', color: 'white' }}
+            >
               Đăng ký
             </Button>
           </Form.Item>

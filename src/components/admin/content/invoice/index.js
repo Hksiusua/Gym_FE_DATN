@@ -72,8 +72,8 @@ const Invoice = () => {
       const response = await createRegistrationBill(params);
       if (response.data) {
         message.success('Hóa đơn được tạo thành công');
-        fetchDataInvoice(); // Cập nhật danh sách hóa đơn
-        setInvoiceModalVisible(false); // Đóng modal
+        fetchDataInvoice(); 
+        setInvoiceModalVisible(false); 
       }
     } catch (error) {
       message.error('Tạo hóa đơn thất bại');
@@ -81,17 +81,15 @@ const Invoice = () => {
   };
 
   return (
-    <div className="courses-page">
+    <div className="w-full overflow-auto">
       <Button type="primary" onClick={() => setModalVisible(true)} style={{ marginBottom: '20px' }}>
-        Đăng ký gói ưu đãi
+        Đăng ký gói hóa đơn
       </Button>
       <Button type="primary" onClick={() => setInvoiceModalVisible(true)} style={{ marginBottom: '20px', marginLeft: '10px' }}>
         Tạo hóa đơn
       </Button>
-
-      {/* Modal đăng ký gói ưu đãi */}
       <Modal
-        title="Đăng ký gói ưu đãi"
+        title="Đăng ký gói hóa đơn"
         visible={modalVisible}
         onOk={handleCreateInvoice}
         onCancel={() => setModalVisible(false)}

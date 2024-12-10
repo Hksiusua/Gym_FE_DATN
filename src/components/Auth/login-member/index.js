@@ -18,31 +18,37 @@ const LoginMember = () => {
   const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
-    e.preventDefault(); 
-    let res = await postLoginMember(email, password);
-    if (res && res?.data?.accessToken) {
-      const defaultUser = {
-        username: "Guest",
-        email: email 
-      };
-
-      dispatch(doLogin({
-        user: {
+    e.preventDefault();
+    try {
+      let res = await postLoginMember(email, password);
+  
+      if (res && res?.data?.accessToken) {
+        const defaultUser = {
+          username: "Guest",
+          email: email,
+        };
+  
+        dispatch(doLogin({
+          user: {
+            username: res?.data?.tenThanhVien || defaultUser.username,
+          },
+          accessToken: res?.data?.accessToken,
+          maThanhVien: res?.data?.maThanhVien,
+        }));
+  
+        localStorage.setItem('accessToken', res?.data?.accessToken);
+        localStorage.setItem('user', JSON.stringify({
           username: res?.data?.tenThanhVien || defaultUser.username,
-        },
-        accessToken: res?.data?.accessToken,
-        maThanhVien: res?.data?.maThanhVien 
-      }));
-
-      localStorage.setItem('accessToken', res?.data?.accessToken);
-      localStorage.setItem('user', JSON.stringify({
-        username: res?.data?.tenThanhVien || defaultUser.username,
-      }));
-
-      navigate('/home');
-      toast.success("Đăng nhập thành công");
-    } else {
-      toast.error("Đăng nhập thất bại");    
+        }));
+  
+        navigate('/home');
+        toast.success("Đăng nhập thành công");
+      } else {
+        toast.error("Đăng nhập thất bại");
+      }
+    } catch (error) {
+      console.error("Lỗi đăng nhập: ", error); 
+      toast.error("Đăng nhập thất bại, vui lòng kiểm tra thông tin của bạn."); 
     }
   };
 
@@ -98,6 +104,12 @@ const LoginMember = () => {
                   >
                     Đăng nhập
                   </Button>
+                  <span className="d-flex justify-content-end text-decoration-underline mt-2"
+                   style={{ cursor: "pointer" }}
+                   onClick={()=>{navigate('/admin/logins')}}
+                  >
+                    Đăng nhập bằng Admin
+                  </span>
                 </div>
               </form>
             </div>
