@@ -1,0 +1,35 @@
+variables:
+  USER_PROJECT: "gymmanager"
+  PATH_PROJECT: "/home/${USER_PROJECT}/${CI_PROJECT_NAME}"
+  DOCKER_IMAGE: "gymmanager-docker-image"
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  variables:
+    GIT_STRATEGY: clone
+  script:
+    # Build Docker image
+    - docker build -t $DOCKER_IMAGE .
+  tags:
+    - gymmanager-runner-dev-shell
+  only:
+    - tags
+
+deploy:
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+  script:
+    # Stop and remove any existing container
+    - docker stop $DOCKER_IMAGE || true
+    - docker rm $DOCKER_IMAGE || true
+    # Run the container on port 3000
+    - docker run -d -p 3000:3000 --name $DOCKER_IMAGE $DOCKER_IMAGE
+  tags:
+    - gymmanager-runner-dev-shell
+  only:
+    - tags
