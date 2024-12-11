@@ -12,7 +12,7 @@ const TableInvoice = ({ data }) => {
       title: 'Ngày Tạo Hóa Đơn',
       dataIndex: 'ngayTaoHoaDon',
       key: 'ngayTaoHoaDon',
-      render: (text) => new Date(text).toLocaleDateString(), // Chuyển đổi ngày về định dạng đọc dễ hơn
+      render: (text) => new Date(text).toLocaleDateString(), 
     },
     {
       title: 'Số Tiền Thanh Toán',
@@ -20,11 +20,6 @@ const TableInvoice = ({ data }) => {
       key: 'soTienThanhToan',
       render: (text) => `${text.toLocaleString()} VND`,
     },
-    // {
-    //   title: 'Tổng Số Hóa Đơn',
-    //   dataIndex: 'tongHoaDon',
-    //   key: 'tongHoaDon',
-    // },
     {
       title: 'Đăng Ký',
       dataIndex: 'dangkys',
@@ -34,20 +29,6 @@ const TableInvoice = ({ data }) => {
           {dangkys.map((dangky) => (
             <li key={dangky.maDangKy}>
               Mã Đăng Ký: {dangky.maDangKy}, Ngày Kích Hoạt: {new Date(dangky.ngayKichHoat).toLocaleDateString()}
-            </li>
-          ))}
-        </ul>
-      ),
-    },
-    {
-      title: 'Doanh Thu',
-      dataIndex: 'doanhThus',
-      key: 'doanhThus',
-      render: (doanhThus) => (
-        <ul>
-          {doanhThus.map((doanhThu) => (
-            <li key={doanhThu.maDoanhThu}>
-              Loại: {doanhThu.loaiThoiGianDoanhThu}, Số Tiền: {doanhThu.soTienDoanhThu.toLocaleString()} VND
             </li>
           ))}
         </ul>

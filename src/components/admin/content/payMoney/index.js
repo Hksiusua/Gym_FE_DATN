@@ -11,9 +11,9 @@ const { RangePicker } = DatePicker;
 
 const PayMoney = () => {
   const [pay, setPay] = useState([]);
-  const [recentPayment, setRecentPayment] = useState(null); // Lưu thông tin thanh toán gần đây nhất
-  const [timeLeft, setTimeLeft] = useState(600); // 10 phút (600 giây)
-  const [isPaymentVerified, setIsPaymentVerified] = useState(false); // Trạng thái xác nhận thanh toán
+  const [recentPayment, setRecentPayment] = useState(null); 
+  const [timeLeft, setTimeLeft] = useState(600);
+  const [isPaymentVerified, setIsPaymentVerified] = useState(false); 
 
   const fetchDataPayMoney = async () => {
     try {
@@ -42,8 +42,6 @@ const PayMoney = () => {
       message.error("Tạo thất bại!");
     }
   };
-
-  // Logic đếm ngược thời gian 10 phút
   useEffect(() => {
     if (recentPayment && timeLeft > 0) {
       const timer = setInterval(() => {
@@ -84,24 +82,11 @@ const PayMoney = () => {
   };
 
   return (
-    <div className="courses-page">
+    <div className="w-full overflow-auto">
       <div className="list-discount">
         <span style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
         </span>
         <ModalPayMoney onhandleCreateCourses={handleCreateCourses} />
-      </div>
-      <div className="input-page">
-        <Input
-          placeholder="Tên khóa học"
-          style={{ width: "100%" }}
-        />
-        <RangePicker
-          style={{ width: "100%" }}
-          placeholder={['Ngày bắt đầu', 'Ngày kết thúc']}
-        />
-        <Button type="primary" style={{ width: '100%' }}>
-          Tìm kiếm
-        </Button>
       </div>
       <div className="table-container">
         <TablePayMoney onPay={pay} />

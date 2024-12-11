@@ -17,35 +17,39 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleLogin = async (e) => {
-    e.preventDefault(); 
-    let res = await postLoginUser(email, password);
-    console.log(res);
-    if (res && res?.data?.accessToken) {
-      const defaultUser = {
-        username: "Guest",
-        email: email 
-      };
+    e.preventDefault();
   
-      dispatch(doLogin({
-        user: {
+    try {
+      const res = await postLoginUser(email, password);
+      if (res && res?.data?.accessToken) {
+        const defaultUser = {
+          username: "Guest",
+          email: email,
+        };
+  
+        dispatch(doLogin({
+          user: {
+            username: res?.data?.tenNguoiDung || defaultUser.username,
+          },
+          accessToken: res?.data?.accessToken,
+          role: res?.data?.role,
+        }));
+  
+        localStorage.setItem('accessToken', res?.data?.accessToken);
+        localStorage.setItem('role', res?.data?.role);
+        localStorage.setItem('user', JSON.stringify({
           username: res?.data?.tenNguoiDung || defaultUser.username,
-        },
-        accessToken: res?.data?.accessToken,
-        role: res?.data?.role 
-      }));
-      
-      localStorage.setItem('accessToken', res?.data?.accessToken);
-      localStorage.setItem('role', res?.data?.role);
-      localStorage.setItem('user', JSON.stringify({
-        username: res?.data?.tenNguoiDung || defaultUser.username,
-      }));
-      
-      navigate('/home');
-      toast.success("Đăng nhập thành công");
-    } else {
-      toast.error("Đăng nhập thất bại");    
+        }));
+  
+        navigate('/home');
+        toast.success("Đăng nhập thành công");
+      } else {
+        toast.error("Đăng nhập thất bại, vui lòng kiểm tra thông tin.");
+      }
+    } catch (error) {
+      toast.error("Đăng nhập thất bại, vui lòng thử lại sau.");
     }
-  };
+  };  
   
 
   return (
@@ -101,6 +105,12 @@ const Login = () => {
                   >
                     Đăng nhập
                   </Button>
+                  <span className="d-flex justify-content-end text-decoration-underline mt-2"
+                   style={{ cursor: "pointer" }}
+                   onClick={()=>{navigate('/member/logins')}}
+                  >
+                    Đăng nhập bằng người dùng
+                  </span>
                 </div>
               </form>
             </div>

@@ -3,7 +3,10 @@ import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link, useLocation } from "react-router-dom"; 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleChevronLeft, faCircleChevronRight } from "@fortawesome/free-solid-svg-icons"; 
-import { FormOutlined, FileSearchOutlined, FileOutlined, SolutionOutlined } from "@ant-design/icons";
+import { FormOutlined, AuditOutlined , FileOutlined,
+SolutionOutlined, BookOutlined, CalculatorOutlined,
+CalendarOutlined, SaveOutlined, HddOutlined  } 
+from "@ant-design/icons";
 import "./SideBar.scss";
 import "./Admin.scss";
 
@@ -27,7 +30,7 @@ const SideBar = () => {
   return (
     <div
       className="admin-sidebar"
-      style={{ display: "flex", height: "100vh", position: "relative" }}
+      style={{ display: "flex", height: "100%", position: "relative" }}
     >
       <Sidebar collapsed={collapsed} className={`sideBar-content ${collapsed ? 'collapsed' : ''}`}>
         <Menu>
@@ -53,22 +56,32 @@ const SideBar = () => {
           </MenuItem>
           <MenuItem className={`ps-menu-button ${isActive("/admins/histories-traning") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
             <Link to="/admins/histories-traning" className="nav-link">
-              <SolutionOutlined className="copy-icon" />  {!collapsed && "Lịch sử tập luyện"}
+              <AuditOutlined  className="copy-icon" />  {!collapsed && "Lịch sử tập luyện"}
             </Link>
           </MenuItem>
           <MenuItem className={`ps-menu-button ${isActive("/admins/invoice") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
             <Link to="/admins/invoice" className="nav-link">
-              <SolutionOutlined className="copy-icon" />  {!collapsed && "Hóa đơn"}
+              <BookOutlined  className="copy-icon" />  {!collapsed && "Hóa đơn"}
             </Link>
           </MenuItem>
           <MenuItem className={`ps-menu-button ${isActive("/admins/pay-monney") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
             <Link to="/admins/pay-monney" className="nav-link">
-              <SolutionOutlined className="copy-icon" />  {!collapsed && "Thanh toán"}
+              <CalculatorOutlined className="copy-icon" />  {!collapsed && "Thanh toán"}
             </Link>
           </MenuItem>
           <MenuItem className={`ps-menu-button ${isActive("/admins/package-courses") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
             <Link to="/admins/package-courses" className="nav-link">
-              <SolutionOutlined className="copy-icon" />  {!collapsed && "Gói tập"}
+              <CalendarOutlined className="copy-icon" />  {!collapsed && "Gói tập"}
+            </Link>
+          </MenuItem>
+          <MenuItem className={`ps-menu-button ${isActive("/admins/total-revenue") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
+            <Link to="/admins/total-revenue" className="nav-link">
+              <SaveOutlined  className="copy-icon" />  {!collapsed && "Doanh thu"}
+            </Link>
+          </MenuItem>
+          <MenuItem className={`ps-menu-button ${isActive("/admins/package-sale") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>
+            <Link to="/admins/package-sale" className="nav-link">
+              <HddOutlined   className="copy-icon" />  {!collapsed && "Gói ưu đãi"}
             </Link>
           </MenuItem>
           {/* <MenuItem className={`ps-menu-button ${isActive("/admins/qr-code") ? 'active' : ''} ${collapsed ? 'collapsed' : ''}`}>

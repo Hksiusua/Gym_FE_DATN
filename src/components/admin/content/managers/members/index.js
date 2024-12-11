@@ -11,7 +11,6 @@ const Members = () => {
     try {
       const response=await getAllMember();
       setMembers(response.data.content);
-      message.success("Lấy dữ liệu thành công")
     } catch (error) {
       message.error("Lấy dữ liệu thất bại")
     }
@@ -31,7 +30,7 @@ const Members = () => {
     }
   }
   return (
-    <div className="courses-page">
+    <div className="w-full overflow-auto">
       <div className="list-discount">
         <ModalMember onCreateMember={handleCreateMember} />
       </div>

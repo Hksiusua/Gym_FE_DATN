@@ -65,11 +65,13 @@ function BasicExample() {
                 Dịch vụ
               </NavLink>
             </Menu.Item>
-            <Menu.Item key="4">
-              <NavLink to="/scanQR" className="nav-link">
-              Quét mã QR
-              </NavLink>
-            </Menu.Item>
+            {isAuthenticated && (
+              <Menu.Item key="4">
+                <NavLink to="/scanQR" className="nav-link">
+                Quét mã QR
+                </NavLink>
+              </Menu.Item>
+            )}
             {isAuthenticated && (
               <Menu.Item key="5">
                 <NavLink to="/histories/member" className="nav-link">

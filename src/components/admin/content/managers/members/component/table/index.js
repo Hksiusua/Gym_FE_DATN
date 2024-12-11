@@ -56,7 +56,7 @@ const TableMembers = ({ onMembers }) => {
       dataSource={onMembers} 
       columns={columns} 
       rowKey="maThanhVien" 
-      pagination={{ pageSize: 5 }} 
+      pagination={{ pageSize: 8 }} 
     />
   );
 };

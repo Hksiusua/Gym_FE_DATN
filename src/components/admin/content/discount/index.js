@@ -63,7 +63,7 @@ const Discounts = () => {
   };
   
   return (
-    <div className="courses-page">
+    <div className="w-full overflow-auto">
       <div className="list-discount">
         <span style={{ fontWeight: 'bold', fontSize: '2wh' }}>
           Danh sách ưu đãi ({tongUuDai})
