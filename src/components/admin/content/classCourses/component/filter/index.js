@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Input, Button, DatePicker, Form } from 'antd';
 
-
 const FilterCourses = ({ onFilter }) => {
   const [maLopHoc, setMaLopHoc] = useState('');
   const [tenLopHoc, setTenLopHoc] = useState('');

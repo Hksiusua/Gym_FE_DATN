@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, Input, DatePicker, message } from 'antd';
-import { getAllInVoice, createRegisterWithDiscount, createRegistrationBill } from '../../../service/apiService';
+import { Button, Modal, Input, DatePicker, message,Select } from 'antd';
+import { getAllInVoice, createRegisterWithDiscount, createRegistrationBill,
+getAllMember, getAllPackageSale, getAllClassCourses, getAllRegisterCourses} from '../../../service/apiService';
+
 import TableInvoice from './component/table';
 
 const Invoice = () => {
@@ -15,9 +17,17 @@ const Invoice = () => {
     maDangKy: '',
     ngayDangKy: '',
   });
+  const [members, setMembers] = useState([]);
+  const [packageSale, setPackageSale] = useState([]);
+  const [classCourses, setClassCourses] = useState([]);
+  const [registerCourses, setRegisterCourses] = useState([]);
 
   useEffect(() => {
     fetchDataInvoice();
+    fetchDataMember();
+    fetchDataPackageSale();
+    fetchDataClassCourses();
+    fetchDataRegisterCourses();
   }, []);
 
   const fetchDataInvoice = async () => {
@@ -25,12 +35,58 @@ const Invoice = () => {
       const response = await getAllInVoice();
       if (response.data.data) {
         setInvoiceData(response.data.data);
+        console.log("response.data.data",response.data.data)
         message.success('Lấy dữ liệu thành công');
       }
     } catch (error) {
       message.error('Không thể lấy dữ liệu hóa đơn');
     }
   };
+
+  const fetchDataMember = async () => {
+    try {
+      const response = await getAllMember();
+      setMembers(response.data.content);
+    } catch (error) {
+      message.error("Lỗi lấy data member");
+    }
+  }
+
+  const fetchDataPackageSale = async () => {
+    try {
+      const response = await getAllPackageSale();
+      setPackageSale(response?.data);
+    } catch (error) {
+    }
+  }
+
+  const fetchDataClassCourses = async () => {
+    try {
+      const respone = await getAllClassCourses();
+      setClassCourses(respone?.data?.data);
+    } catch (error) {
+      
+    }
+  }
+
+  const fetchDataRegisterCourses = async () => {
+    try {
+      const params = {
+        maDangKy: '', 
+        maThanhVien: '', 
+        maGoiUuDai: '',
+        ngayDangKy: '',
+        ngayKichHoat: '',
+        trangThaiDangKy: '', 
+        maLopHoc: '',
+        maHoaDon: '',
+      };
+      const response = await getAllRegisterCourses(params);
+      setRegisterCourses(response.data);
+    } catch (error) {
+      
+    }
+  }
 
   const handleCreateInvoice = async () => {
     if (!memberId || !packageId || !classId || !activationDate) {
@@ -96,24 +152,45 @@ const Invoice = () => {
         okText="Xác nhận"
         cancelText="Hủy"
       >
-        <Input
-          placeholder="Nhập mã thành viên"
-          value={memberId}
-          onChange={(e) => setMemberId(e.target.value)}
+        <Select
+          placeholder="Chọn mã thành viên"
+          value={memberId|| undefined}
+          onChange={(value) => setMemberId(value)}
           style={{ width: '100%', marginBottom: '10px' }}
-        />
-        <Input
-          placeholder="Nhập mã gói ưu đãi"
-          value={packageId}
-          onChange={(e) => setPackageId(e.target.value)}
+          allowClear 
+        >
+          {members.map(member => (
+            <Select.Option key={member.maThanhVien} value={member.maThanhVien}>
+              {member.tenThanhVien} 
+            </Select.Option>
+          ))}
+        </Select>
+        <Select
+          placeholder = "Nhập mã gói ưu đãi"
+          value={packageId||undefined}
+          onChange={(value)=>setPackageId(value)}
           style={{ width: '100%', marginBottom: '10px' }}
-        />
-        <Input
-          placeholder="Nhập mã lớp học"
-          value={classId}
-          onChange={(e) => setClassId(e.target.value)}
-          style={{ width: '100%', marginBottom: '10px' }}
-        />
+          allowClear
+        >
+          {packageSale.map(packages => (
+            <Select.Option key={packages.maGoiUuDai} value={packages.maGoiUuDai}>
+              {packages.maGoiUuDai}
+            </Select.Option>
+          ))}
+        </Select>
+        <Select
+        placeholder="Nhập mã lớp học"
+        value={classId||undefined}
+        onChange={(e)=> setClassId(e)}
+        style={{width: '100%', marginBottom:'10px'}}
+        allowClear
+        >
+        {classCourses.map(classCourse =>(
+          <Select.Option key={classCourse.maLopHoc} value={classCourse.maLopHoc}>
+          {classCourse.tenLopHoc}
+          </Select.Option>
+        ))}
+        </Select>
         <DatePicker
           onChange={(date, dateString) => setActivationDate(dateString)}
           style={{ width: '100%' }}
@@ -129,19 +206,25 @@ const Invoice = () => {
         okText="Xác nhận"
         cancelText="Hủy"
       >
-        <Input
-          placeholder="Nhập mã đăng ký"
-          value={invoiceDetails.maDangKy}
-          onChange={(e) => setInvoiceDetails({ ...invoiceDetails, maDangKy: e.target.value })}
-          style={{ width: '100%', marginBottom: '10px' }}
-        />
+        <Select
+        placeholder="Chọn mã đăng ký"
+        value={invoiceDetails.maDangKy || undefined}
+        onChange={(value) => setInvoiceDetails({ ...invoiceDetails, maDangKy: value })}
+        style={{ width: '100%', marginBottom: '10px' }}
+        allowClear
+        >
+        {registerCourses.map((course) => (
+          <Select.Option key={course.maDangKy} value={course.maDangKy}>
+            {course.tenDangKy}
+          </Select.Option>
+        ))}
+      </Select>
         <DatePicker
           onChange={(date, dateString) => setInvoiceDetails({ ...invoiceDetails, ngayDangKy: dateString })}
           style={{ width: '100%' }}
           placeholder="Ngày đăng ký"
         />
       </Modal>
-
       <div className="table-container">
         <TableInvoice data={invoiceData} />
       </div>
