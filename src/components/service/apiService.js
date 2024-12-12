@@ -1,5 +1,24 @@
 import { instance } from "../utils/axiosCustomize";
 
+const getAllUser = async() => {
+  return await instance.get(`user/getAll`);
+}
+
+const getAllRegisterCourses = async(data) => {
+  return await instance.get(`api-public/dang-ky-goi/search`,{
+    params:{
+      maDangKy: data.maDangKy,
+      maThanhVien: data.maThanhVien,
+      maGoiUuDai: data.maGoiUuDai, 
+      ngayDangKy: data.ngayDangKy,
+      ngayKichHoat: data.ngayKichHoat,
+      trangThaiDangKy: data.trangThaiDangKy,
+      maLopHoc: data.maLopHoc,
+      maHoaDon: data.maHoaDon,
+    }
+  })
+}
+
 const createExportMemberExcel = async(data) => {
   return await instance.post(`member/export`, null, {
     params: {
@@ -190,6 +209,8 @@ const postFinishQuiz = (data) => {
 };
 
 export {
+  getAllUser,
+  getAllRegisterCourses,
   createExportMemberExcel,
   createPackageSale,
   getAllPackageSale,

@@ -1,25 +1,42 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Modal, Form, Input, DatePicker, Button, Select } from 'antd';
 import dayjs from 'dayjs';
+import { getAllInVoice } from '../../../../../service/apiService';
 
-const { Option } = Select; 
+const { Option } = Select;
+
 const ModalPayMoney = ({ onhandleCreateCourses }) => {
   const [visible, setVisible] = useState(false);
   const [form] = Form.useForm();
+  const [invoice, setInvoice] = useState([]);
 
   const showModal = () => {
     setVisible(true);
   };
+
+  const fetchDataInvoice = useCallback(async () => {
+    try {
+      const response = await getAllInVoice();
+      console.log("hóa đơn",response.data.data)
+      setInvoice(response.data.data); 
+    } catch (error) {
+      console.error("Failed to fetch invoice data:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchDataInvoice();
+  }, [fetchDataInvoice]);
 
   const handleOk = async () => {
     try {
       const values = await form.validateFields();
       onhandleCreateCourses({
         ...values,
-        ngayThanhToan: dayjs(values.ngayThanhToan).toISOString(), 
+        ngayThanhToan: dayjs(values.ngayThanhToan).toISOString(),
       });
       form.resetFields();
-      setVisible(false); 
+      setVisible(false);
     } catch (error) {
       console.error('Validation Failed:', error);
     }
@@ -41,12 +58,19 @@ const ModalPayMoney = ({ onhandleCreateCourses }) => {
         onCancel={handleCancel}
       >
         <Form form={form} layout="vertical">
+          {/* Cập nhật trường "Mã Hóa Đơn" thành Select */}
           <Form.Item
             label="Mã Hóa Đơn"
             name="maHoaDon"
-            rules={[{ required: true, message: 'Vui lòng nhập mã hóa đơn!' }]}
+            rules={[{ required: true, message: 'Vui lòng chọn mã hóa đơn!' }]}
           >
-            <Input />
+            <Select placeholder="Chọn mã hóa đơn">
+              {invoice.map((item) => (
+                <Option key={item.maHoaDon} value={item.maHoaDon}>
+                  Mã hóa đơn: {item.maHoaDon}-Số tiền thanh toán: {item.soTienThanhToan} 
+                </Option>
+              ))}
+            </Select>
           </Form.Item>
           <Form.Item
             label="Ngày Thanh Toán"
